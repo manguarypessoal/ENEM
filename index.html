@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Master Plan ENEM | Iago Manguary</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1E3A8A; /* Azul Escuro */
+            --secondary: #F59E0B; /* Amarelo/Âmbar ENEM */
+            --accent: #10B981; /* Verde Sucesso */
+            --bg: #f4f7f6;
+            --card: #ffffff;
+            --text: #1e293b;
+            --border: #e2e8f0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background: var(--primary);
+            color: white;
+            padding: 2.5rem 1rem;
+            text-align: center;
+            border-bottom: 5px solid var(--secondary);
+        }
+
+        header h1 { margin: 0; font-size: 2rem; letter-spacing: -1px; }
+        header p { margin: 0.5rem 0 0; opacity: 0.9; font-weight: 400; }
+
+        .container {
+            max-width: 1000px;
+            margin: -30px auto 50px;
+            padding: 0 20px;
+        }
+
+        /* Stats Bar */
+        .stats-bar {
+            background: var(--card);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .progress-container {
+            width: 100%;
+            background: #edf2f7;
+            border-radius: 999px;
+            height: 20px;
+            margin: 15px 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--secondary), #d97706);
+            width: 0%;
+            transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .progress-text {
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        /* Accordion Semanas */
+        .week-section {
+            background: var(--card);
+            border-radius: 12px;
+            margin-bottom: 15px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+        }
+
+        .week-header {
+            padding: 20px;
+            background: #fff;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.2s;
+            user-select: none;
+        }
+
+        .week-header:hover { background: #fef3c7; }
+        .week-header h3 { margin: 0; font-size: 1.1rem; color: var(--primary); }
+        
+        .week-content {
+            display: none;
+            padding: 0 20px 20px;
+            border-top: 1px solid var(--border);
+        }
+
+        .week-content.active { display: block; }
+
+        /* Estilo dos Dias e Tópicos */
+        .day-block {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f8fafc;
+            border-radius: 8px;
+            border-left: 4px solid var(--secondary);
+        }
+
+        .day-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--text);
+        }
+
+        .day-title input {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            accent-color: var(--primary);
+        }
+
+        .topic-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            font-size: 0.92rem;
+        }
+
+        .topic-list li {
+            padding: 4px 0;
+            padding-left: 32px;
+            color: #475569;
+            position: relative;
+        }
+
+        .topic-list li::before {
+            content: "•";
+            position: absolute;
+            left: 15px;
+            color: var(--secondary);
+            font-weight: bold;
+        }
+
+        .completed-card {
+            background: #f1f5f9 !important;
+            opacity: 0.7;
+            border-left-color: #cbd5e1;
+        }
+
+        .completed-card .day-title {
+            text-decoration: line-through;
+            color: #94a3b8;
+        }
+
+        /* Simulados Section */
+        .simulados-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .sim-card {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .sim-card label { display: block; font-size: 0.8rem; font-weight: 600; margin-bottom: 8px; }
+        .sim-card input {
+            width: 80%;
+            padding: 8px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .btn-reset {
+            margin-top: 40px;
+            background: #dc2626;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            width: 100%;
+            transition: 0.3s;
+        }
+
+        .btn-reset:hover { background: #b91c1c; }
+
+        @media (max-width: 600px) {
+            header h1 { font-size: 1.5rem; }
+            .container { margin-top: -20px; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Dashboard Estratégico ENEM</h1>
+    <p>Foco nos Assuntos de Alta Recorrência (80/20) | Iago Manguary</p>
+</header>
+
+<div class="container">
+    <div class="stats-bar">
+        <span class="progress-text">Progresso Geral: <span id="percent-val">0%</span></span>
+        <div class="progress-container">
+            <div class="progress-fill" id="progress-bar"></div>
+        </div>
+        <small id="days-count">0 de 48 tarefas concluídas</small>
+    </div>
+
+    <div id="planner-content"></div>
+
+    <div class="simulados-grid" id="simulados-content"></div>
+
+    <button class="btn-reset" onclick="resetAll()">Reiniciar Todo o Plano ENEM</button>
+</div>
+
+<script>
+    const detailedPlan = [
+        {
+            week: 1, title: "Fundações de Matemática e Humanas",
+            days: [
+                { d: "Segunda", t: "Matemática Básica + Redação", topics: ["Razão, Proporção e Regra de 3", "Porcentagem (Cai em +15 questões!)", "Redação: Estrutura da Dissertação-Argumentativa"] },
+                { d: "Terça", t: "História + Geografia", topics: ["História do Brasil: Período Colonial e Escravidão", "Geografia Física: Climatologia e Biomas Brasileiros"] },
+                { d: "Quarta", t: "Biologia + Química", topics: ["Ecologia: Cadeias alimentares e poluição", "Química: Separação de Misturas (Filtração, Destilação)"] },
+                { d: "Quinta", t: "Matemática + Linguagens", topics: ["Estatística Básica: Média, Moda e Mediana", "Linguagens: Interpretação de Texto e Funções da Linguagem"] },
+                { d: "Sexta", t: "Física + Filosofia", topics: ["Física: Cinemática Básica (Velocidade e Aceleração)", "Filosofia: Pré-Socráticos e Filosofia Antiga (Grécia)"] },
+                { d: "Sábado", t: "Prática e Redação", topics: ["Escrever 1 Redação (Tema livre de edições passadas)", "Resolver 20 questões de Matemática Básica"] }
+            ]
+        },
+        {
+            week: 2, title: "Funções, Físico-Química e Modernidade",
+            days: [
+                { d: "Segunda", t: "Matemática + Redação", topics: ["Funções de 1º e 2º Grau (Análise de Gráficos)", "Redação: Competência 1 (Domínio da Norma Padrão)"] },
+                { d: "Terça", t: "História + Geografia", topics: ["História Geral: Revolução Industrial", "Geografia: Urbanização e Problemas Ambientais Urbanos"] },
+                { d: "Quarta", t: "Biologia + Química", topics: ["Citologia: Organelas e suas funções", "Química: Estequiometria Básica (Regra de 3 química)"] },
+                { d: "Quinta", t: "Matemática + Linguagens", topics: ["Análise Combinatória (Princípio Fundamental da Contagem)", "Linguagens: Movimentos Literários (Modernismo)"] },
+                { d: "Sexta", t: "Física + Sociologia", topics: ["Física: Dinâmica (Leis de Newton e Energia)", "Sociologia: Surgimento da Sociologia (Comte, Marx)"] },
+                { d: "Sábado", t: "Simulado Parcial", topics: ["Resolver 45 questões de Ciências da Natureza", "Revisar erros em Estequiometria e Dinâmica"] }
+            ]
+        },
+        {
+            week: 3, title: "Geometria e Brasil Império",
+            days: [
+                { d: "Segunda", t: "Matemática + Redação", topics: ["Geometria Plana: Áreas de Figuras Planas e Triângulos", "Redação: Competência 2 (Compreensão da Proposta)"] },
+                { d: "Terça", t: "História + Geografia", topics: ["Brasil Império (1º, 2º Reinado e Período Regencial)", "Geografia Agrária: Estrutura fundiária e agronegócio"] },
+                { d: "Quarta", t: "Biologia + Química", topics: ["Genética Básica e 1ª Lei de Mendel", "Química Orgânica: Funções Orgânicas (Álcool, Cetona...)"] },
+                { d: "Quinta", t: "Matemática + Linguagens", topics: ["Probabilidade (O que eu quero / O que eu tenho)", "Linguagens: Variação Linguística e Figuras de Linguagem"] },
+                { d: "Sexta", t: "Física + Filosofia", topics: ["Física: Termologia (Calorimetria e Propagação de Calor)", "Filosofia: Filosofia Moderna (Descartes, Kant)"] },
+                { d: "Sábado", t: "Prática e Redação", topics: ["Escrever 1 Redação (Eixo: Meio Ambiente)", "Resolver 20 questões de Geometria Plana"] }
+            ]
+        },
+        {
+            week: 4, title: "Espaço, Ondas e Atualidades",
+            days: [
+                { d: "Segunda", t: "Matemática + Redação", topics: ["Geometria Espacial: Volume de Prismas e Cilindros", "Redação: Competência 3 (Seleção de Argumentos)"] },
+                { d: "Terça", t: "História + Geografia", topics: ["História do Brasil: Era Vargas e República Populista", "Geopolítica Mundial e Conflitos Atuais"] },
+                { d: "Quarta", t: "Biologia + Química", topics: ["Fisiologia Humana: Sistema Digestório e Circulatório", "Físico-Química: Soluções e Concentrações"] },
+                { d: "Quinta", t: "Matemática + Linguagens", topics: ["Trigonometria (Triângulo Retângulo)", "Linguagens: Arte Contemporânea e Vanguardas"] },
+                { d: "Sexta", t: "Física + Sociologia", topics: ["Física: Ondulatória (Frequência, Comprimento, Fenômenos)", "Sociologia: Mundo do Trabalho e Globalização"] },
+                { d: "Sábado", t: "Simulado Parcial", topics: ["Resolver 45 questões de Humanas e Linguagens", "Revisar erros de interpretação"] }
+            ]
+        },
+        {
+            week: 5, title: "Guerra Fria e Eletricidade",
+            days: [
+                { d: "Segunda", t: "Matemática + Redação", topics: ["Geometria Espacial: Cones e Esferas", "Redação: Competência 4 (Uso de Conectivos)"] },
+                { d: "Terça", t: "História + Geografia", topics: ["História Geral: Guerras Mundiais e Guerra Fria", "Geografia: Demografia e Migrações"] },
+                { d: "Quarta", t: "Biologia + Química", topics: ["Botânica Básica (Fisiologia e grupos vegetais)", "Química Orgânica: Isomeria"] },
+                { d: "Quinta", t: "Matemática + Linguagens", topics: ["Matemática Financeira (Juros e Descontos)", "Linguagens: Educação Física e Esportes no ENEM"] },
+                { d: "Sexta", t: "Física + Filosofia", topics: ["Física: Eletrodinâmica (Circuitos, Resistores - Cai muito!)", "Filosofia: Filosofia Política (Maquiavel, Hobbes, Rousseau)"] },
+                { d: "Sábado", t: "Prática e Redação", topics: ["Escrever 1 Redação (Eixo: Tecnologia/Sociedade)", "Resolver 20 questões de Eletrodinâmica"] }
+            ]
+        },
+        {
+            week: 6, title: "Revisão Final Temática",
+            days: [
+                { d: "Segunda", t: "Matemática + Redação", topics: ["Revisão: Logaritmos e Funções Exponenciais", "Redação: Competência 5 (Proposta de Intervenção Completa)"] },
+                { d: "Terça", t: "História + Geografia", topics: ["Brasil: Ditadura Militar e Redemocratização", "Geografia: Indústria Brasileira e Globalização"] },
+                { d: "Quarta", t: "Biologia + Química", topics: ["Evolução (Darwin e Lamarck) e Imunização (Vacinas/Soros)", "Eletroquímica (Pilhas e Eletrólise)"] },
+                { d: "Quinta", t: "Matemática + Linguagens", topics: ["Revisão: Análise Combinatória e Probabilidade", "Linguagens: Gêneros Textuais e Intertextualidade"] },
+                { d: "Sexta", t: "Física + Sociologia", topics: ["Física: Óptica Geométrica e Refração", "Sociologia: Cidadania, Movimentos Sociais e Direitos Humanos"] },
+                { d: "Sábado", t: "Simulado Completo - Dia 1", topics: ["Resolver prova antiga do ENEM (Dia 1: Humanas, Linguagens, Redação)", "Simular tempo real (5h30min)"] }
+            ]
+        },
+        {
+            week: 7, title: "Reta Final (Treinamento de Prova)",
+            days: [
+                { d: "Segunda", t: "Análise de Erros (Simulado Dia 1)", topics: ["Mapear questões erradas por falta de atenção vs conteúdo", "Revisar teoria específica dos erros de Humanas"] },
+                { d: "Terça", t: "Matemática", topics: ["Maratona de Questões: Estatística e Geometria Plana", "Treino de Matemática Básica sob pressão de tempo"] },
+                { d: "Quarta", t: "Natureza", topics: ["Maratona de Questões: Ecologia, Estequiometria e Circuitos", "Leitura de gráficos e tabelas experimentais"] },
+                { d: "Quinta", t: "Redação + Repertório", topics: ["Escrever 2 redações em sequência", "Memorizar 3 citações coringas (Filosofia/Sociologia)"] },
+                { d: "Sexta", t: "Estratégia de Prova", topics: ["Como aplicar o método de resolução em 3 passadas (Fáceis > Médias > Chutes)", "Descanso ativo"] },
+                { d: "Sábado", t: "Simulado Completo - Dia 2", topics: ["Resolver prova antiga do ENEM (Dia 2: Natureza e Matemática)", "Simular tempo real (5h)"] }
+            ]
+        },
+        {
+            week: 8, title: "Semana D (Ajuste Fino)",
+            days: [
+                { d: "Segunda", t: "Análise de Erros (Simulado Dia 2)", topics: ["Estudo reverso focado em Matemática e Natureza", "Identificar pegadinhas clássicas da prova"] },
+                { d: "Terça", t: "Revisão Flexível", topics: ["Leitura apenas dos resumos e mapas mentais das matérias de maior dificuldade"] },
+                { d: "Quarta", t: "Revisão Flexível", topics: ["Resolução de 15 questões de Natureza + 15 de Matemática Básica"] },
+                { d: "Quinta", t: "Fechamento", topics: ["Revisão rápida de Fórmulas de Física e Matemática", "Check-list da estrutura da Redação"] },
+                { d: "Sexta", t: "Descanso", topics: ["Zero estudo. Preparar documento, caneta preta transparente e lanches", "Assistir a um filme ou série relaxante"] },
+                { d: "Sábado", t: "Pré-Prova", topics: ["Revisão de véspera (Assistir a aulões abertos no YouTube, apenas de forma passiva)"] }
+            ]
+        }
+    ];
+
+    function init() {
+        const container = document.getElementById('planner-content');
+        const simContainer = document.getElementById('simulados-content');
+
+        detailedPlan.forEach(week => {
+            const weekHtml = `
+                <div class="week-section">
+                    <div class="week-header" onclick="toggleWeek(${week.week})">
+                        <h3>Semana ${week.week}: ${week.title}</h3>
+                        <span id="week-icon-${week.week}">+</span>
+                    </div>
+                    <div class="week-content" id="week-content-${week.week}">
+                        ${week.days.map((day, dIdx) => `
+                            <div class="day-block" id="enem-block-w${week.week}-d${dIdx}">
+                                <div class="day-title">
+                                    <input type="checkbox" id="enem-w${week.week}-d${dIdx}" onchange="toggleDay(${week.week}, ${dIdx})">
+                                    <span>${day.d} - ${day.t}</span>
+                                </div>
+                                <ul class="topic-list">
+                                    ${day.topics.map(topic => `<li>${topic}</li>`).join('')}
+                                </ul>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+            container.innerHTML += weekHtml;
+
+            // Criar campo de simulado apenas até a semana 6, nas 7 e 8 a dinâmica é diferente
+            if(week.week <= 8) {
+                simContainer.innerHTML += `
+                    <div class="sim-card">
+                        <label>Simulado/Lista Sem. ${week.week}</label>
+                        <input type="number" id="enem-sim-w${week.week}" placeholder="Acertos" onchange="saveSim(${week.week})">
+                    </div>
+                `;
+            }
+        });
+        loadProgress();
+    }
+
+    function toggleWeek(num) {
+        const content = document.getElementById(`week-content-${num}`);
+        const icon = document.getElementById(`week-icon-${num}`);
+        const isActive = content.classList.contains('active');
+        
+        content.classList.toggle('active');
+        icon.innerText = isActive ? '+' : '-';
+    }
+
+    function toggleDay(w, d) {
+        const checkbox = document.getElementById(`enem-w${w}-d${d}`);
+        const block = document.getElementById(`enem-block-w${w}-d${d}`);
+        
+        if (checkbox.checked) {
+            block.classList.add('completed-card');
+        } else {
+            block.classList.remove('completed-card');
+        }
+        saveProgress();
+    }
+
+    function saveProgress() {
+        const checks = document.querySelectorAll('input[type="checkbox"]');
+        const state = {};
+        checks.forEach(c => state[c.id] = c.checked);
+        localStorage.setItem('enem_iago_progress', JSON.stringify(state));
+        updateProgressBar();
+    }
+
+    function saveSim(w) {
+        const val = document.getElementById(`enem-sim-w${w}`).value;
+        let sims = JSON.parse(localStorage.getItem('enem_iago_sims')) || {};
+        sims[w] = val;
+        localStorage.setItem('enem_iago_sims', JSON.stringify(sims));
+    }
+
+    function loadProgress() {
+        const state = JSON.parse(localStorage.getItem('enem_iago_progress')) || {};
+        const sims = JSON.parse(localStorage.getItem('enem_iago_sims')) || {};
+
+        Object.keys(state).forEach(id => {
+            const el = document.getElementById(id);
+            if (el) {
+                el.checked = state[id];
+                if(state[id]) el.closest('.day-block').classList.add('completed-card');
+            }
+        });
+
+        Object.keys(sims).forEach(w => {
+            const el = document.getElementById(`enem-sim-w${w}`);
+            if (el) el.value = sims[w];
+        });
+
+        // Abre a primeira semana por padrão
+        document.getElementById('week-content-1').classList.add('active');
+        document.getElementById('week-icon-1').innerText = '-';
+
+        updateProgressBar();
+    }
+
+    function updateProgressBar() {
+        const checks = document.querySelectorAll('input[type="checkbox"]');
+        const checked = Array.from(checks).filter(c => c.checked).length;
+        const total = checks.length;
+        const percent = total === 0 ? 0 : Math.round((checked / total) * 100);
+
+        document.getElementById('progress-bar').style.width = percent + '%';
+        document.getElementById('percent-val').innerText = percent + '%';
+        document.getElementById('days-count').innerText = `${checked} de ${total} tarefas concluídas`;
+    }
+
+    function resetAll() {
+        if (confirm("Tens certeza que desejas apagar o teu progresso do ENEM?")) {
+            localStorage.removeItem('enem_iago_progress');
+            localStorage.removeItem('enem_iago_sims');
+            location.reload();
+        }
+    }
+
+    window.onload = init;
+</script>
+
+</body>
+</html>
