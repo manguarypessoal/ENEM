@@ -3,474 +3,476 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plataforma de Estudos | Iago Manguary</title>
+    <title>Plataforma ENEM | Iago Manguary</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,1,0" />
 
     <style>
         :root {
-            /* Paleta Premium baseada na imagem */
-            --bg-cream: #f8f6f0;
-            --primary-navy: #102640;
-            --accent-gold: #c2a670;
-            --accent-gold-hover: #a88e5b;
-            --text-dark: #1a202c;
-            --text-muted: #64748b;
-            --surface-white: #ffffff;
-            --border-light: #e2e8f0;
+            /* Design System EdTech */
+            --bg-app: #f4f7f9;
+            --bg-surface: #ffffff;
+            --primary: #2563eb; /* Azul Foco */
+            --primary-hover: #1d4ed8;
+            --primary-light: #eff6ff;
+            --enem-yellow: #f59e0b;
+            --enem-yellow-light: #fef3c7;
             --success: #10b981;
+            --success-light: #d1fae5;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
             
-            --shadow-card: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
-            --radius-lg: 12px;
-            --radius-md: 8px;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+            --shadow-md: 0 10px 25px -5px rgba(0,0,0,0.05);
+            --radius-lg: 16px;
+            --radius-md: 10px;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
 
-        body { background-color: var(--bg-cream); color: var(--text-dark); min-height: 100vh; display: flex; flex-direction: column; }
+        body { background-color: var(--bg-app); color: var(--text-main); display: flex; height: 100vh; overflow: hidden; }
 
-        /* ==== TOP NAVBAR ==== */
-        .navbar {
-            background-color: var(--bg-cream);
-            padding: 1rem 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid rgba(0,0,0,0.05);
+        /* ==== SIDEBAR ==== */
+        .sidebar {
+            width: 280px; background: var(--bg-surface); border-right: 1px solid var(--border);
+            display: flex; flex-direction: column; z-index: 100; transition: 0.3s;
         }
 
-        .brand-container { display: flex; align-items: center; gap: 15px; }
+        .brand {
+            padding: 24px; display: flex; align-items: center; gap: 12px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .brand img { width: 40px; border-radius: 8px; }
+        .brand-text h2 { font-size: 1.1rem; font-weight: 800; color: var(--text-main); }
+        .brand-text p { font-size: 0.75rem; color: var(--enem-yellow); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+
+        .nav-menu { padding: 20px 16px; flex: 1; display: flex; flex-direction: column; gap: 8px; }
+
+        .nav-item {
+            display: flex; align-items: center; gap: 12px; padding: 14px 16px;
+            border-radius: var(--radius-md); cursor: pointer; color: var(--text-muted);
+            font-weight: 600; font-size: 0.95rem; transition: all 0.2s;
+        }
+
+        .nav-item:hover { background: var(--bg-app); color: var(--primary); }
+        .nav-item.active { background: var(--primary); color: white; box-shadow: 0 4px 15px rgba(37, 99, 235, 0.2); }
+        .nav-item .material-symbols-rounded { font-size: 22px; }
+
+        .user-profile { padding: 20px; border-top: 1px solid var(--border); display: flex; align-items: center; gap: 12px; }
+        .avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--primary-light); color: var(--primary); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.2rem; }
+
+        /* ==== MAIN AREA ==== */
+        .main-wrapper { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+
+        .topbar {
+            background: var(--bg-surface); height: 70px; border-bottom: 1px solid var(--border);
+            display: flex; align-items: center; justify-content: space-between; padding: 0 32px;
+        }
+
+        .content-area { flex: 1; overflow-y: auto; padding: 32px; }
+
+        /* Vistas (Tabs) */
+        .view-section { display: none; animation: slideUp 0.4s ease; }
+        .view-section.active { display: block; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* ==== DASHBOARD ==== */
+        .header-title { font-size: 1.8rem; font-weight: 800; margin-bottom: 8px; }
+        .header-subtitle { color: var(--text-muted); margin-bottom: 32px; font-weight: 500; }
+
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; margin-bottom: 32px; }
         
-        .brand-logo {
-            width: 45px;
-            height: auto;
-            mix-blend-mode: multiply; /* Remove fundo branco da imagem caso tenha */
-        }
-
-        .brand-text { display: flex; flex-direction: column; }
-        .brand-text h1 { font-size: 1.1rem; font-weight: 700; color: var(--primary-navy); letter-spacing: 0.5px; }
-        .brand-text span { font-size: 0.75rem; color: var(--text-muted); }
-
-        .nav-links { display: flex; gap: 30px; align-items: center; }
-        .nav-links a { text-decoration: none; color: var(--text-dark); font-weight: 500; font-size: 0.9rem; transition: color 0.2s; cursor: pointer; }
-        .nav-links a:hover, .nav-links a.active { color: var(--accent-gold); }
-
-        .btn-outline {
-            padding: 8px 20px; border: 2px solid var(--primary-navy); border-radius: 6px;
-            color: var(--primary-navy); font-weight: 600; text-decoration: none; transition: all 0.2s; cursor: pointer;
-            background: transparent;
-        }
-        .btn-outline:hover { background: var(--primary-navy); color: white; }
-
-        /* ==== HERO SECTION ==== */
-        .hero {
-            background-color: var(--primary-navy);
-            color: white;
-            padding: 5rem 2rem 8rem 2rem;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        /* Marca d'água decorativa (opcional, simulando o fundo) */
-        .hero::before {
-            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-            background-image: url('logo.png'); background-repeat: no-repeat;
-            background-position: left 10% center, right 10% center; background-size: 300px;
-            opacity: 0.03; pointer-events: none;
-        }
-
-        .hero h2 { font-size: 2.5rem; font-weight: 700; margin-bottom: 1rem; max-width: 800px; margin-left: auto; margin-right: auto; }
-        .hero p { font-size: 1.1rem; color: #cbd5e1; margin-bottom: 2.5rem; max-width: 600px; margin-left: auto; margin-right: auto; }
-
-        .btn-gold {
-            background-color: var(--accent-gold); color: white; padding: 14px 32px;
-            border-radius: 6px; font-weight: 600; font-size: 1rem; border: none; cursor: pointer;
-            transition: background 0.2s; text-transform: uppercase; letter-spacing: 0.5px;
-        }
-        .btn-gold:hover { background-color: var(--accent-gold-hover); }
-
-        /* ==== DASHBOARD CARDS (OVERLAP) ==== */
-        .dashboard-overlap {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px;
-            max-width: 1100px; margin: -4rem auto 3rem auto; padding: 0 20px; position: relative; z-index: 10;
-        }
-
         .stat-card {
-            background: var(--surface-white); padding: 24px; border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-card); display: flex; align-items: center; gap: 20px;
+            background: var(--bg-surface); padding: 24px; border-radius: var(--radius-lg);
+            border: 1px solid var(--border); box-shadow: var(--shadow-sm);
         }
-
-        .stat-icon {
-            background: var(--bg-cream); color: var(--accent-gold);
-            width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
-        }
-
-        .stat-info { flex: 1; }
-        .stat-title { font-size: 0.85rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; }
-        .stat-value { font-size: 1.8rem; font-weight: 700; color: var(--primary-navy); margin-top: 4px; }
-
-        .progress-bar-bg { background: var(--border-light); height: 6px; border-radius: 3px; margin-top: 10px; overflow: hidden; }
-        .progress-bar-fill { background: var(--primary-navy); height: 100%; transition: width 0.5s ease; }
-
-        /* ==== MAIN CONTENT ==== */
-        .container { max-width: 1100px; margin: 0 auto 4rem auto; padding: 0 20px; width: 100%; }
         
-        .section-title { font-size: 1.5rem; color: var(--primary-navy); margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: flex-end;}
+        .stat-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+        .stat-title { font-size: 0.85rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; }
+        .stat-icon { background: var(--primary-light); color: var(--primary); padding: 8px; border-radius: 8px; display: flex; }
+        .stat-value { font-size: 2.2rem; font-weight: 800; color: var(--text-main); }
+        
+        .progress-track { height: 8px; background: var(--bg-app); border-radius: 4px; overflow: hidden; margin-top: 16px; }
+        .progress-bar { height: 100%; background: linear-gradient(90deg, var(--primary), #60a5fa); width: 0%; transition: width 1s cubic-bezier(0.4, 0, 0.2, 1); }
 
-        /* Tabs Logic */
-        .tab-content { display: none; animation: fadeIn 0.4s; }
-        .tab-content.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        /* ==== MÓDULOS DE ESTUDO ==== */
+        .modules-grid { display: grid; gap: 20px; }
+        
+        .module-card {
+            background: var(--bg-surface); border: 1px solid var(--border);
+            border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-sm);
+        }
 
-        /* ==== ROTEIROS ACCORDION ==== */
-        .week-card { background: var(--surface-white); border-radius: var(--radius-lg); margin-bottom: 16px; box-shadow: var(--shadow-card); overflow: hidden; }
-        .week-header {
+        .module-header {
             padding: 20px 24px; display: flex; justify-content: space-between; align-items: center;
-            cursor: pointer; transition: background 0.2s;
+            cursor: pointer; user-select: none; transition: background 0.2s;
         }
-        .week-header:hover { background: #fafafa; }
-        .week-title-box { display: flex; align-items: center; gap: 15px; }
-        .week-title-box h3 { color: var(--primary-navy); font-size: 1.1rem; }
+        .module-header:hover { background: #f8fafc; }
+
+        .module-info { display: flex; align-items: center; gap: 16px; }
+        .module-icon-box {
+            width: 48px; height: 48px; border-radius: 12px; display: flex;
+            align-items: center; justify-content: center; font-size: 24px;
+        }
+
+        .m-mat { background: #e0e7ff; color: #4338ca; }
+        .m-nat { background: #dcfce7; color: #15803d; }
+        .m-hum { background: #fef9c3; color: #a16207; }
+        .m-lin { background: #fce7f3; color: #be185d; }
+
+        .module-title h3 { font-size: 1.1rem; font-weight: 700; }
+        .module-title span { font-size: 0.8rem; color: var(--text-muted); font-weight: 600; }
+
+        .module-content { display: none; padding: 0 24px 24px 24px; border-top: 1px solid var(--border); }
         
-        .badge { background: var(--bg-cream); border: 1px solid var(--accent-gold); color: var(--accent-gold-hover); padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; }
-
-        .week-body { display: none; padding: 0 24px 24px; border-top: 1px solid var(--border-light); }
-
-        .days-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; margin-top: 20px; }
+        .topic-list { margin-top: 20px; display: grid; gap: 12px; }
         
-        .day-box {
-            background: var(--bg-cream); border-radius: var(--radius-md); padding: 16px;
-            border-left: 4px solid var(--accent-gold); transition: all 0.2s;
+        .topic-item {
+            display: flex; align-items: center; gap: 16px; padding: 16px;
+            background: var(--bg-app); border-radius: var(--radius-md); transition: 0.2s;
+            border-left: 4px solid transparent;
         }
-        .day-box.done { border-left-color: var(--success); opacity: 0.7; }
-        .day-box.done .topic-item { text-decoration: line-through; color: var(--text-muted); }
 
-        .day-top { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 12px; }
+        .topic-item:hover { background: #e2e8f0; }
+        .topic-item.done { border-left-color: var(--success); background: var(--success-light); opacity: 0.8; }
+        .topic-item.done h4 { text-decoration: line-through; color: var(--text-muted); }
+
+        /* Custom Checkbox */
+        .chk-wrap input {
+            appearance: none; width: 24px; height: 24px; border: 2px solid var(--text-muted);
+            border-radius: 6px; outline: none; cursor: pointer; position: relative; background: white; transition: 0.2s;
+        }
+        .chk-wrap input:checked { background: var(--success); border-color: var(--success); }
+        .chk-wrap input:checked::after {
+            content: '✔'; color: white; position: absolute; font-size: 14px; top: 50%; left: 50%; transform: translate(-50%, -50%);
+        }
+
+        .topic-details h4 { font-size: 1rem; font-weight: 700; color: var(--text-main); margin-bottom: 4px; }
+        .topic-details p { font-size: 0.85rem; color: var(--text-muted); }
+
+        /* ==== SIMULADOS ==== */
+        .sim-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px; }
+        .sim-card { background: var(--bg-surface); padding: 24px; border-radius: var(--radius-lg); border: 1px solid var(--border); }
+        .sim-card h3 { font-size: 1.1rem; margin-bottom: 16px; display: flex; justify-content: space-between; }
         
-        /* Premium Checkbox */
-        .check-wrap input {
-            appearance: none; width: 22px; height: 22px; border: 2px solid var(--primary-navy);
-            border-radius: 4px; outline: none; cursor: pointer; position: relative; background: white; transition: 0.2s;
-        }
-        .check-wrap input:checked { background: var(--success); border-color: var(--success); }
-        .check-wrap input:checked::after { content: '✔'; color: white; position: absolute; font-size: 14px; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+        .input-group { margin-bottom: 16px; }
+        .input-group label { display: block; font-size: 0.85rem; font-weight: 700; color: var(--text-muted); margin-bottom: 8px; }
+        .input-group input { width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 8px; font-size: 1rem; font-weight: 600; outline: none; transition: border 0.2s; }
+        .input-group input:focus { border-color: var(--primary); }
 
-        .day-info h4 { font-size: 0.95rem; color: var(--primary-navy); }
-        .day-info span { font-size: 0.8rem; color: var(--accent-gold-hover); font-weight: 600; display: block; margin-bottom: 6px;}
-        
-        .topic-list { list-style: none; }
-        .topic-item { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 6px; display: flex; gap: 8px; }
-        .topic-item::before { content: '•'; color: var(--accent-gold); font-weight: bold; }
+        .btn-reset { margin-top: 20px; background: #fee2e2; color: #ef4444; border: none; padding: 12px 24px; border-radius: 8px; font-weight: 700; cursor: pointer; transition: 0.2s; }
+        .btn-reset:hover { background: #ef4444; color: white; }
 
-        /* ==== SIMULADOS GRID ==== */
-        .sim-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; }
-        .sim-input {
-            background: var(--surface-white); padding: 16px; border-radius: var(--radius-md);
-            box-shadow: var(--shadow-card); display: flex; flex-direction: column; gap: 8px;
-        }
-        .sim-input label { font-size: 0.85rem; font-weight: 600; color: var(--primary-navy); }
-        .sim-input input {
-            padding: 10px; border: 1px solid var(--border-light); border-radius: 6px;
-            font-size: 1rem; font-weight: 600; color: var(--text-dark); text-align: center;
-        }
-        .sim-input input:focus { outline: none; border-color: var(--accent-gold); }
-
-        /* Reset App */
-        .btn-text-danger { background: none; border: none; color: #ef4444; font-size: 0.85rem; font-weight: 600; cursor: pointer; text-decoration: underline; }
-
-        @media (max-width: 768px) {
-            .nav-links { display: none; }
-            .hero h2 { font-size: 2rem; }
-            .dashboard-overlap { margin-top: -2rem; }
-        }
     </style>
 </head>
 <body>
 
-    <header class="navbar">
-        <div class="brand-container">
-            <img src="logo.png" alt="Logo Manguary" class="brand-logo" onerror="this.style.display='none'">
+    <aside class="sidebar">
+        <div class="brand">
+            <img src="logo.png" alt="Logo" onerror="this.style.display='none'">
             <div class="brand-text">
-                <h1>IAGO MANGUARY</h1>
-                <span>Plataforma de Estudos</span>
+                <h2>Manguary</h2>
+                <p>Plataforma ENEM</p>
             </div>
         </div>
-        <nav class="nav-links">
-            <a class="active" onclick="changeTab('tab-roteiro', this)">Roteiros de Estudo</a>
-            <a onclick="changeTab('tab-simulados', this)">Simulados</a>
+
+        <nav class="nav-menu">
+            <div class="nav-item active" onclick="switchView('dashboard', this)">
+                <span class="material-symbols-rounded">space_dashboard</span> Painel Geral
+            </div>
+            <div class="nav-item" onclick="switchView('trilha', this)">
+                <span class="material-symbols-rounded">map</span> Trilha de Aprovação
+            </div>
+            <div class="nav-item" onclick="switchView('simulados', this)">
+                <span class="material-symbols-rounded">edit_document</span> Meus Simulados
+            </div>
         </nav>
-        <button class="btn-outline" onclick="resetAll()">Limpar Progresso</button>
-    </header>
 
-    <section class="hero">
-        <h2>PLATAFORMA ESTRATÉGICA DE ESTUDOS - IAGO MANGUARY</h2>
-        <p>Do ENEM às Certificações UFT e ANBIMA: seu plano otimizado e focado em resultados.</p>
-        <button class="btn-gold" onclick="document.getElementById('plan-section').scrollIntoView({behavior: 'smooth'})">Acessar Meu Roteiro Agora</button>
-    </section>
-
-    <section class="dashboard-overlap">
-        <div class="stat-card">
-            <div class="stat-icon"><span class="material-symbols-rounded">monitoring</span></div>
-            <div class="stat-info">
-                <div class="stat-title">Progresso Geral</div>
-                <div class="stat-value" id="val-percent">0%</div>
-                <div class="progress-bar-bg"><div class="progress-bar-fill" id="bar-percent" style="width: 0%"></div></div>
+        <div class="user-profile">
+            <div class="avatar">IM</div>
+            <div>
+                <div style="font-weight: 700; font-size: 0.9rem;">Iago Manguary</div>
+                <div style="font-size: 0.8rem; color: var(--text-muted);">Estudante PRO</div>
             </div>
         </div>
-        <div class="stat-card">
-            <div class="stat-icon"><span class="material-symbols-rounded">checklist</span></div>
-            <div class="stat-info">
-                <div class="stat-title">Tarefas Concluídas</div>
-                <div class="stat-value"><span id="val-tasks">0</span><span style="font-size:1rem; color:var(--text-muted)">/48</span></div>
-            </div>
-        </div>
-        <div class="stat-card">
-            <div class="stat-icon"><span class="material-symbols-rounded">history_edu</span></div>
-            <div class="stat-info">
-                <div class="stat-title">Média Simulados</div>
-                <div class="stat-value" id="val-sim">--</div>
-            </div>
-        </div>
-    </section>
+    </aside>
 
-    <main class="container" id="plan-section">
-        
-        <div id="tab-roteiro" class="tab-content active">
-            <div class="section-title">
-                <span>Trilha de Aprovação</span>
+    <main class="main-wrapper">
+        <header class="topbar">
+            <div style="font-weight: 600; color: var(--text-muted);">Foco, Consistência e Aprovação.</div>
+            <div style="display: flex; gap: 16px;">
+                <span class="material-symbols-rounded" style="color: var(--text-muted); cursor: pointer;">notifications</span>
             </div>
-            <div id="planner-render"></div>
-        </div>
+        </header>
 
-        <div id="tab-simulados" class="tab-content">
-            <div class="section-title">
-                <span>Histórico de Acertos</span>
-            </div>
-            <div class="sim-grid" id="simulados-render"></div>
-        </div>
+        <div class="content-area">
+            
+            <section id="dashboard" class="view-section active">
+                <h1 class="header-title">Bem-vindo de volta, Iago!</h1>
+                <p class="header-subtitle">Aqui está o resumo da sua preparação para o ENEM.</p>
 
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <span class="stat-title">Progresso do Edital</span>
+                            <span class="stat-icon"><span class="material-symbols-rounded">trending_up</span></span>
+                        </div>
+                        <div class="stat-value" id="dash-perc">0%</div>
+                        <div class="progress-track"><div class="progress-bar" id="dash-bar"></div></div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <span class="stat-title">Tópicos Dominados</span>
+                            <span class="stat-icon" style="background:#dcfce7; color:#15803d;"><span class="material-symbols-rounded">task_alt</span></span>
+                        </div>
+                        <div class="stat-value"><span id="dash-tasks">0</span><span style="font-size: 1.2rem; color: var(--text-muted);"> / 24</span></div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <span class="stat-title">Média em Simulados</span>
+                            <span class="stat-icon" style="background:#fef9c3; color:#a16207;"><span class="material-symbols-rounded">military_tech</span></span>
+                        </div>
+                        <div class="stat-value" id="dash-sim">--</div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="trilha" class="view-section">
+                <h1 class="header-title">Sua Trilha ENEM 80/20</h1>
+                <p class="header-subtitle">Conteúdos organizados pela matriz de referência do MEC.</p>
+                
+                <div class="modules-grid" id="modules-container">
+                    </div>
+            </section>
+
+            <section id="simulados" class="view-section">
+                <h1 class="header-title">Métricas de Prova</h1>
+                <p class="header-subtitle">Registre seus acertos nos simulados modelo ENEM.</p>
+                
+                <div class="sim-grid" id="sims-container">
+                    </div>
+
+                <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border);">
+                    <h3 style="margin-bottom: 10px;">Opções Avançadas</h3>
+                    <button class="btn-reset" onclick="hardReset()">Resetar Toda a Plataforma</button>
+                </div>
+            </section>
+
+        </div>
     </main>
 
 <script>
-    // Seus dados do Master Plan
-    const masterPlanData = [
+    // Estrutura de Dados Profissional Focada 100% no ENEM
+    const enemDatabase = [
         {
-            week: 1, title: "Fundações de Matemática e Humanas", badge: "Base",
-            days: [
-                { d: "Segunda", t: "Matemática Básica + Redação", topics: ["Razão, Proporção e Regra de 3", "Porcentagem (+15 questões)", "Estrutura Dissertação"] },
-                { d: "Terça", t: "História + Geografia", topics: ["Período Colonial", "Climatologia e Biomas"] },
-                { d: "Quarta", t: "Biologia + Química", topics: ["Ecologia", "Separação de Misturas"] },
-                { d: "Quinta", t: "Matemática + Linguagens", topics: ["Estatística Básica", "Interpretação de Texto"] },
-                { d: "Sexta", t: "Física + Filosofia", topics: ["Cinemática Básica", "Pré-Socráticos"] },
-                { d: "Sábado", t: "Prática e Redação", topics: ["Escrever 1 Redação", "20 questões Mat. Básica"] }
+            id: 'mat', title: 'Matemática e suas Tecnologias', colorClass: 'm-mat', icon: 'calculate',
+            topics: [
+                { id: 'm1', name: 'Matemática Básica', desc: 'Razão, Proporção, Regra de 3 e Porcentagem (+15 questões/ano).' },
+                { id: 'm2', name: 'Funções', desc: '1º Grau, 2º Grau e interpretação de gráficos.' },
+                { id: 'm3', name: 'Geometria Plana e Espacial', desc: 'Áreas, volumes de prismas, cilindros e cones.' },
+                { id: 'm4', name: 'Estatística e Probabilidade', desc: 'Média, Moda, Mediana e Análise Combinatória.' }
             ]
         },
         {
-            week: 2, title: "Funções, Físico-Química e Modernidade", badge: "Avanço",
-            days: [
-                { d: "Segunda", t: "Matemática + Redação", topics: ["Funções 1º e 2º Grau", "Competência 1"] },
-                { d: "Terça", t: "História + Geografia", topics: ["Revolução Industrial", "Urbanização"] },
-                { d: "Quarta", t: "Biologia + Química", topics: ["Citologia", "Estequiometria Básica"] },
-                { d: "Quinta", t: "Matemática + Linguagens", topics: ["Análise Combinatória", "Modernismo"] },
-                { d: "Sexta", t: "Física + Sociologia", topics: ["Dinâmica (Newton)", "Surgimento da Sociologia"] },
-                { d: "Sábado", t: "Simulado Parcial", topics: ["45 questões Natureza", "Revisar erros"] }
+            id: 'nat', title: 'Ciências da Natureza', colorClass: 'm-nat', icon: 'biotech',
+            topics: [
+                { id: 'n1', name: 'Ecologia e Impactos Ambientais', desc: 'Cadeias alimentares, poluição e sustentabilidade.' },
+                { id: 'n2', name: 'Físico-Química e Estequiometria', desc: 'Cálculo estequiométrico, soluções e eletroquímica.' },
+                { id: 'n3', name: 'Física: Eletrodinâmica', desc: 'Circuitos elétricos, resistores, potência e energia.' },
+                { id: 'n4', name: 'Física: Ondulatória e Termologia', desc: 'Fenômenos ondulatórios, propagação de calor.' },
+                { id: 'n5', name: 'Citologia e Genética', desc: 'Organelas celulares e 1ª Lei de Mendel.' }
             ]
         },
         {
-            week: 3, title: "Geometria e Brasil Império", badge: "Essencial",
-            days: [
-                { d: "Segunda", t: "Matemática + Redação", topics: ["Geometria Plana", "Competência 2"] },
-                { d: "Terça", t: "História + Geografia", topics: ["Brasil Império", "Geografia Agrária"] },
-                { d: "Quarta", t: "Biologia + Química", topics: ["Genética (Mendel)", "Química Orgânica"] },
-                { d: "Quinta", t: "Matemática + Linguagens", topics: ["Probabilidade", "Figuras de Linguagem"] },
-                { d: "Sexta", t: "Física + Filosofia", topics: ["Termologia", "Filosofia Moderna"] },
-                { d: "Sábado", t: "Prática e Redação", topics: ["Escrever 1 Redação", "20 questões Geometria"] }
+            id: 'hum', title: 'Ciências Humanas', colorClass: 'm-hum', icon: 'public',
+            topics: [
+                { id: 'h1', name: 'História do Brasil', desc: 'Período Colonial, Império, Era Vargas e Ditadura.' },
+                { id: 'h2', name: 'Geografia Agrária e Urbana', desc: 'Estrutura fundiária, urbanização e globalização.' },
+                { id: 'h3', name: 'Filosofia Antiga e Moderna', desc: 'Pré-socráticos, Platão, Aristóteles, Descartes e Kant.' },
+                { id: 'h4', name: 'Sociologia do Trabalho', desc: 'Modelos produtivos (Fordismo, Toyotismo) e cidadania.' }
             ]
         },
         {
-            week: 4, title: "Espaço, Ondas e Atualidades", badge: "Peso Alto",
-            days: [
-                { d: "Segunda", t: "Matemática + Redação", topics: ["Geometria Espacial", "Competência 3"] },
-                { d: "Terça", t: "História + Geografia", topics: ["Era Vargas", "Geopolítica Mundial"] },
-                { d: "Quarta", t: "Biologia + Química", topics: ["Fisiologia Humana", "Físico-Química (Soluções)"] },
-                { d: "Quinta", t: "Matemática + Linguagens", topics: ["Trigonometria", "Arte Contemporânea"] },
-                { d: "Sexta", t: "Física + Sociologia", topics: ["Ondulatória", "Globalização"] },
-                { d: "Sábado", t: "Simulado Parcial", topics: ["45 questões Humanas", "Revisar erros"] }
-            ]
-        },
-        {
-            week: 5, title: "Guerra Fria e Eletricidade", badge: "Foco",
-            days: [
-                { d: "Segunda", t: "Matemática + Redação", topics: ["Cones e Esferas", "Competência 4"] },
-                { d: "Terça", t: "História + Geografia", topics: ["Guerra Fria", "Demografia"] },
-                { d: "Quarta", t: "Biologia + Química", topics: ["Botânica Básica", "Isomeria"] },
-                { d: "Quinta", t: "Matemática Financeira", topics: ["Juros e Descontos", "ANBIMA/ENEM"] },
-                { d: "Sexta", t: "Física + Filosofia", topics: ["Eletrodinâmica", "Filosofia Política"] },
-                { d: "Sábado", t: "Prática", topics: ["1 Redação", "20 questões Circuitos"] }
-            ]
-        },
-        {
-            week: 6, title: "Revisão Final Temática", badge: "Revisão",
-            days: [
-                { d: "Segunda", t: "Matemática + Redação", topics: ["Logaritmos", "Competência 5"] },
-                { d: "Terça", t: "História + Geografia", topics: ["Ditadura Militar", "Indústria"] },
-                { d: "Quarta", t: "Biologia + Química", topics: ["Evolução e Vacinas", "Eletroquímica"] },
-                { d: "Quinta", t: "Matemática + Linguagens", topics: ["Revisão Combinatória", "Gêneros Textuais"] },
-                { d: "Sexta", t: "Física + Sociologia", topics: ["Óptica", "Cidadania"] },
-                { d: "Sábado", t: "Simulado Dia 1", topics: ["Prova Humanas/Ling", "Simular 5h30"] }
-            ]
-        },
-        {
-            week: 7, title: "Treinamento de Prova", badge: "Estratégia",
-            days: [
-                { d: "Segunda", t: "Análise Dia 1", topics: ["Mapear erros", "Revisão pontual"] },
-                { d: "Terça", t: "Matemática", topics: ["Maratona Estatística", "Pressão de tempo"] },
-                { d: "Quarta", t: "Natureza", topics: ["Maratona Ecologia", "Leitura de gráficos"] },
-                { d: "Quinta", t: "Redação", topics: ["2 redações", "Citações coringas"] },
-                { d: "Sexta", t: "Estratégia", topics: ["Método 3 passadas", "Descanso ativo"] },
-                { d: "Sábado", t: "Simulado Dia 2", topics: ["Prova Exatas", "Simular 5h"] }
-            ]
-        },
-        {
-            week: 8, title: "Semana D", badge: "Véspera",
-            days: [
-                { d: "Segunda", t: "Análise Dia 2", topics: ["Estudo reverso", "Pegadinhas clássicas"] },
-                { d: "Terça", t: "Revisão Flexível", topics: ["Resumos dificuldade alta"] },
-                { d: "Quarta", t: "Revisão Flexível", topics: ["30 questões mistas"] },
-                { d: "Quinta", t: "Fechamento", topics: ["Fórmulas", "Check-list Redação"] },
-                { d: "Sexta", t: "Descanso", topics: ["Zero estudo", "Preparar material"] },
-                { d: "Sábado", t: "Pré-Prova", topics: ["Aulões YouTube (passivo)"] }
+            id: 'lin', title: 'Linguagens e Redação', colorClass: 'm-lin', icon: 'menu_book',
+            topics: [
+                { id: 'l1', name: 'Estratégias de Leitura', desc: 'Interpretação de texto, funções da linguagem.' },
+                { id: 'l2', name: 'Movimentos Literários', desc: 'Foco em Modernismo e literatura contemporânea.' },
+                { id: 'l3', name: 'Estrutura Dissertativo-Argumentativa', desc: 'Introdução, desenvolvimento e proposta de intervenção.' },
+                { id: 'l4', name: 'Repertório Sociocultural', desc: 'Citações e dados para os eixos temáticos principais.' }
             ]
         }
     ];
 
-    function changeTab(tabId, el) {
-        document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-        document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
-        document.getElementById(tabId).classList.add('active');
+    // Gerenciador de Abas
+    function switchView(viewId, el) {
+        document.querySelectorAll('.view-section').forEach(v => v.classList.remove('active'));
+        document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+        document.getElementById(viewId).classList.add('active');
         el.classList.add('active');
     }
 
-    function toggleWeek(header) {
-        const body = header.nextElementSibling;
-        body.style.display = (body.style.display === 'none' || body.style.display === '') ? 'block' : 'none';
+    // Toggle Acordeon de Módulos
+    function toggleModule(header) {
+        const content = header.nextElementSibling;
+        const isOpen = content.style.display === 'block';
+        content.style.display = isOpen ? 'none' : 'block';
     }
 
-    function buildUI() {
-        const planCont = document.getElementById('planner-render');
-        const simCont = document.getElementById('simulados-render');
+    // Renderizar a Interface
+    function renderApp() {
+        const modContainer = document.getElementById('modules-container');
+        const simContainer = document.getElementById('sims-container');
+        let totalTopics = 0;
 
-        masterPlanData.forEach((wk, wIdx) => {
-            // Cards Roteiro
-            let html = `
-                <div class="week-card">
-                    <div class="week-header" onclick="toggleWeek(this)">
-                        <div class="week-title-box">
-                            <span class="badge">${wk.badge}</span>
-                            <h3>Semana ${wk.week}: ${wk.title}</h3>
+        // Limpar HTML
+        modContainer.innerHTML = '';
+        simContainer.innerHTML = '';
+
+        enemDatabase.forEach((module, mIdx) => {
+            totalTopics += module.topics.length;
+            
+            // HTML dos Módulos
+            let topicsHtml = module.topics.map(t => `
+                <div class="topic-item" id="item-${t.id}">
+                    <label class="chk-wrap">
+                        <input type="checkbox" id="${t.id}" onchange="updateProgress()">
+                    </label>
+                    <div class="topic-details">
+                        <h4>${t.name}</h4>
+                        <p>${t.desc}</p>
+                    </div>
+                </div>
+            `).join('');
+
+            modContainer.innerHTML += `
+                <div class="module-card">
+                    <div class="module-header" onclick="toggleModule(this)">
+                        <div class="module-info">
+                            <div class="module-icon-box ${module.colorClass}">
+                                <span class="material-symbols-rounded">${module.icon}</span>
+                            </div>
+                            <div class="module-title">
+                                <h3>${module.title}</h3>
+                                <span>${module.topics.length} Tópicos Essenciais</span>
+                            </div>
                         </div>
                         <span class="material-symbols-rounded">expand_more</span>
                     </div>
-                    <div class="week-body">
-                        <div class="days-grid">
-                            ${wk.days.map((d, dIdx) => `
-                                <div class="day-box" id="box-${wIdx}-${dIdx}">
-                                    <div class="day-top">
-                                        <label class="check-wrap">
-                                            <input type="checkbox" id="chk-${wIdx}-${dIdx}" onchange="calcProgress()">
-                                        </label>
-                                        <div class="day-info">
-                                            <span>${d.t}</span>
-                                            <h4>${d.d}</h4>
-                                        </div>
-                                    </div>
-                                    <ul class="topic-list">
-                                        ${d.topics.map(t => `<li class="topic-item">${t}</li>`).join('')}
-                                    </ul>
-                                </div>
-                            `).join('')}
-                        </div>
+                    <div class="module-content">
+                        <div class="topic-list">${topicsHtml}</div>
                     </div>
                 </div>
             `;
-            planCont.innerHTML += html;
 
-            // Inputs Simulados
-            simCont.innerHTML += `
-                <div class="sim-input">
-                    <label>Simulado S${wk.week}</label>
-                    <input type="number" id="sim-${wk.week}" placeholder="Acertos" oninput="calcProgress()">
+            // HTML dos Simulados
+            simContainer.innerHTML += `
+                <div class="sim-card">
+                    <h3>Simulado ${mIdx + 1} 
+                        <span style="font-size: 0.8rem; background: #e2e8f0; padding: 4px 8px; border-radius: 4px;">Modelo ENEM</span>
+                    </h3>
+                    <div class="input-group">
+                        <label>Dia 1 (Humanas, Ling, Redação)</label>
+                        <input type="number" id="sim-${mIdx}-d1" placeholder="Acertos / 90" oninput="updateSims()">
+                    </div>
+                    <div class="input-group">
+                        <label>Dia 2 (Natureza, Matemática)</label>
+                        <input type="number" id="sim-${mIdx}-d2" placeholder="Acertos / 90" oninput="updateSims()">
+                    </div>
                 </div>
             `;
         });
 
-        loadCache();
-        // Abre a primeira semana
-        document.querySelector('.week-body').style.display = 'block';
-    }
-
-    function calcProgress() {
-        const boxes = document.querySelectorAll('input[type="checkbox"]');
-        let done = 0;
-        let progressData = {};
-
-        boxes.forEach(chk => {
-            progressData[chk.id] = chk.checked;
-            const parts = chk.id.split('-');
-            const box = document.getElementById(`box-${parts[1]}-${parts[2]}`);
-            
-            if(chk.checked) {
-                done++;
-                box.classList.add('done');
-            } else {
-                box.classList.remove('done');
-            }
-        });
-
-        const perc = Math.round((done / boxes.length) * 100) || 0;
-        document.getElementById('val-percent').innerText = perc + '%';
-        document.getElementById('bar-percent').style.width = perc + '%';
-        document.getElementById('val-tasks').innerText = done;
-
-        // Simulados
-        let simData = {};
-        let totalSim = 0, countSim = 0;
-        masterPlanData.forEach(wk => {
-            const v = document.getElementById(`sim-${wk.week}`).value;
-            if(v) {
-                simData[`sim-${wk.week}`] = v;
-                totalSim += parseInt(v);
-                countSim++;
-            }
-        });
-
-        document.getElementById('val-sim').innerText = countSim > 0 ? Math.round(totalSim/countSim) : '--';
-
-        localStorage.setItem('manguary_plan', JSON.stringify(progressData));
-        localStorage.setItem('manguary_sim', JSON.stringify(simData));
-    }
-
-    function loadCache() {
-        const p = JSON.parse(localStorage.getItem('manguary_plan')) || {};
-        const s = JSON.parse(localStorage.getItem('manguary_sim')) || {};
-
-        Object.keys(p).forEach(k => { if(document.getElementById(k)) document.getElementById(k).checked = p[k]; });
-        Object.keys(s).forEach(k => { if(document.getElementById(k)) document.getElementById(k).value = s[k]; });
+        // Atualizar total no painel
+        document.getElementById('dash-tasks').parentElement.innerHTML = `<span id="dash-tasks">0</span><span style="font-size: 1.2rem; color: var(--text-muted);"> / ${totalTopics}</span>`;
         
-        calcProgress();
+        loadData();
     }
 
-    function resetAll() {
-        if(confirm("Deseja apagar todo o seu progresso?")) {
-            localStorage.clear(); location.reload();
+    // Calcular Progresso
+    function updateProgress() {
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        let done = 0;
+        let saveData = {};
+
+        checkboxes.forEach(chk => {
+            saveData[chk.id] = chk.checked;
+            const item = document.getElementById(`item-${chk.id}`);
+            if (chk.checked) {
+                done++;
+                item.classList.add('done');
+            } else {
+                item.classList.remove('done');
+            }
+        });
+
+        const perc = Math.round((done / checkboxes.length) * 100) || 0;
+        
+        document.getElementById('dash-tasks').innerText = done;
+        document.getElementById('dash-perc').innerText = perc + '%';
+        document.getElementById('dash-bar').style.width = perc + '%';
+
+        localStorage.setItem('iago_enem_progress', JSON.stringify(saveData));
+    }
+
+    // Calcular Simulados
+    function updateSims() {
+        const inputs = document.querySelectorAll('.sim-card input');
+        let simData = {};
+        let total = 0, count = 0;
+
+        inputs.forEach(inp => {
+            if(inp.value) {
+                simData[inp.id] = inp.value;
+                total += parseInt(inp.value);
+                count++;
+            }
+        });
+
+        const media = count > 0 ? Math.round(total / count) : '--';
+        document.getElementById('dash-sim').innerText = media !== '--' ? media + '/90' : media;
+        
+        localStorage.setItem('iago_enem_sims', JSON.stringify(simData));
+    }
+
+    // Carregar Banco de Dados Local
+    function loadData() {
+        const p = JSON.parse(localStorage.getItem('iago_enem_progress')) || {};
+        const s = JSON.parse(localStorage.getItem('iago_enem_sims')) || {};
+
+        Object.keys(p).forEach(k => {
+            const el = document.getElementById(k);
+            if(el) el.checked = p[k];
+        });
+
+        Object.keys(s).forEach(k => {
+            const el = document.getElementById(k);
+            if(el) el.value = s[k];
+        });
+
+        updateProgress();
+        updateSims();
+        
+        // Abrir primeiro módulo
+        const firstMod = document.querySelector('.module-content');
+        if(firstMod) firstMod.style.display = 'block';
+    }
+
+    function hardReset() {
+        if(confirm("Certeza absoluta? Todo seu progresso do ENEM será apagado.")) {
+            localStorage.clear();
+            location.reload();
         }
     }
 
-    window.onload = buildUI;
+    // Iniciar App
+    window.onload = renderApp;
 </script>
 
 </body>
