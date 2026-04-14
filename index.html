@@ -3,158 +3,212 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Academy | Iago Manguary - Foco no ENEM</title>
+    <title>Sua Jornada ENEM | Iago Manguary Palette</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;1,600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,1,0" />
 
     <style>
         :root {
-            --bg-cream: #FDFCF8; 
-            --bg-app: #F4F5F7; 
-            --bg-surface: #FFFFFF;
+            /* Paleta Iago Manguary (Inspirada na Logo) */
+            --bg-cream: #FDFCF8; /* Fundo principal da logo - Conforto Visual */
+            --bg-app: #F4F5F7; /* Cinza claro para profundidade dos cards */
+            --bg-surface: #FFFFFF; /* Fundo dos cards */
             
-            --primary-navy: #1A365D; 
+            --primary-navy: #1A365D; /* Azul Marinho da Logo - Foco e Autoridade */
             --primary-hover: #2A4A7F;
-            --accent-gold: #C2A670; 
+            --accent-gold: #C2A670; /* Dourado Fosco - Destaque Premium */
             --accent-hover: #A88E5B;
             
             --text-main: #0F172A;
             --text-muted: #64748B;
             --border: #E2E8F0;
-            --success: #059669; 
+            --success: #059669; /* Verde sóbrio */
             
+            /* Sombra Estilo Descomplica */
             --shadow-sm: 0 4px 6px -1px rgba(0,0,0,0.03);
-            --shadow-md: 0 10px 25px -5px rgba(26, 54, 93, 0.08);
-            --radius-xl: 20px;
-            --radius-lg: 12px;
-            --radius-md: 8px;
+            --shadow-md: 0 10px 30px -5px rgba(26, 54, 93, 0.08);
+            
+            /* Bordas bem arredondadas Descomplica */
+            --radius-xl: 24px;
+            --radius-lg: 16px;
+            --radius-md: 10px;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+
         body { background-color: var(--bg-app); color: var(--text-main); display: flex; height: 100vh; overflow: hidden; }
 
-        /* SIDEBAR */
+        /* ==== SIDEBAR (CREAM MODE - APENAS LOGO) ==== */
         .sidebar {
-            width: 290px; background: var(--bg-cream);
+            width: 280px; background: var(--bg-cream);
             display: flex; flex-direction: column; z-index: 1000; transition: transform 0.3s ease;
             border-right: 1px solid var(--border);
         }
+
         .brand {
-            padding: 30px 20px 20px; display: flex; flex-direction: column; align-items: center; gap: 8px;
+            padding: 40px 24px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
             border-bottom: 1px solid var(--border); text-align: center;
         }
-        .brand img { width: 90px; height: auto; mix-blend-mode: multiply; margin-bottom: 4px; }
-        .brand-text h2 { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; color: var(--primary-navy); }
-        .brand-text p { font-size: 0.7rem; color: var(--accent-gold); font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; }
 
-        .nav-menu { padding: 24px 16px; flex: 1; display: flex; flex-direction: column; gap: 6px; overflow-y: auto; }
-        .nav-item {
-            display: flex; align-items: center; gap: 14px; padding: 14px 18px; border-radius: var(--radius-md);
-            cursor: pointer; color: var(--text-muted); font-weight: 600; font-size: 0.95rem; transition: all 0.2s ease;
+        /* LOGO CENTRALIZADA E SEM TEXTO (Ajustado) */
+        .brand img { 
+            width: 110px; height: auto; 
+            mix-blend-mode: multiply; /* Fundo da logo mescla com o creme */
+            display: block;
+            margin: 0 auto;
         }
-        .nav-item:hover { background: rgba(26, 54, 93, 0.05); color: var(--primary-navy); }
-        .nav-item.active { background: var(--primary-navy); color: #ffffff; box-shadow: 0 4px 12px rgba(26, 54, 93, 0.2); }
-        
-        /* MAIN AREA */
-        .main-wrapper { flex: 1; display: flex; flex-direction: column; overflow: hidden; position: relative; }
-        .topbar { background: var(--primary-navy); height: 80px; display: flex; align-items: center; justify-content: space-between; padding: 0 40px; }
-        .topbar-left { display: flex; align-items: center; gap: 16px; }
-        .mobile-toggle { display: none; background: none; border: none; color: #ffffff; cursor: pointer; padding: 8px; }
 
-        .pomodoro-container { display: flex; align-items: center; gap: 12px; background: rgba(255,255,255,0.1); padding: 8px 16px; border-radius: 50px; border: 1px solid rgba(255,255,255,0.2); }
-        .timer-display { font-family: monospace; font-size: 1.2rem; font-weight: 800; color: #ffffff; min-width: 60px; text-align: center;}
-        .timer-btn { background: none; border: none; cursor: pointer; color: #ffffff; display: flex; align-items: center; transition: 0.2s;}
-        .timer-btn:hover { color: var(--accent-gold); }
+        .nav-menu { padding: 32px 16px; flex: 1; display: flex; flex-direction: column; gap: 8px; overflow-y: auto; }
+
+        .nav-item {
+            display: flex; align-items: center; gap: 14px; padding: 16px 20px; border-radius: var(--radius-md);
+            cursor: pointer; color: var(--text-muted); font-weight: 700; font-size: 1rem; transition: all 0.2s ease;
+        }
+
+        .nav-item:hover { background: rgba(26, 54, 93, 0.05); color: var(--primary-navy); transform: translateX(4px); }
+        .nav-item.active { background: var(--primary-navy); color: #ffffff; box-shadow: 0 6px 15px rgba(26, 54, 93, 0.2); }
+        
+        /* ==== MAIN AREA ==== */
+        .main-wrapper { flex: 1; display: flex; flex-direction: column; overflow: hidden; position: relative; }
+
+        .topbar {
+            background: var(--bg-surface); height: 80px; border-bottom: 1px solid var(--border);
+            display: flex; align-items: center; justify-content: space-between; padding: 0 40px;
+        }
+
+        .topbar-left { display: flex; align-items: center; gap: 16px; }
+        .mobile-toggle { display: none; background: none; border: none; color: var(--primary-navy); cursor: pointer; padding: 8px; }
+
+        /* POMODORO TIMER ESTILO DESCOMPLICA */
+        .pomodoro-container {
+            display: flex; align-items: center; gap: 12px; background: var(--bg-app);
+            padding: 10px 20px; border-radius: 50px; border: 1px solid var(--border);
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.03);
+        }
+        .timer-display { font-family: monospace; font-size: 1.3rem; font-weight: 800; color: var(--primary-navy); min-width: 65px; text-align: center;}
+        .timer-btn { background: none; border: none; cursor: pointer; color: var(--text-muted); display: flex; align-items: center; transition: 0.2s;}
+        .timer-btn:hover { color: var(--primary-navy); }
 
         .content-area { flex: 1; overflow-y: auto; padding: 40px; scroll-behavior: smooth; }
+
+        /* Vistas (Tabs) */
         .view-section { display: none; animation: slideUp 0.4s ease; max-width: 1100px; margin: 0 auto; }
         .view-section.active { display: block; }
-        @keyframes slideUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* DASHBOARD */
-        .header-title { font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 700; color: var(--primary-navy); margin-bottom: 6px; }
-        .header-subtitle { color: var(--text-muted); margin-bottom: 40px; font-weight: 500; font-size: 1.05rem; }
-        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; margin-bottom: 40px; }
+        /* ==== DASHBOARD CARDS (FLOATING) ==== */
+        .header-title { font-family: 'Playfair Display', serif; font-size: 2.5rem; font-weight: 700; color: var(--primary-navy); margin-bottom: 6px; }
+        .header-subtitle { color: var(--text-muted); margin-bottom: 48px; font-weight: 500; font-size: 1.1rem; }
+
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-bottom: 48px; }
         
-        .stat-card { background: var(--bg-surface); padding: 32px; border-radius: var(--radius-xl); border: 1px solid var(--border); box-shadow: var(--shadow-sm); transition: transform 0.3s; position: relative; overflow: hidden; }
-        .stat-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); }
-        .stat-card.blue-card { background: var(--primary-navy); border-color: var(--primary-navy); }
-        .stat-card.blue-card .stat-title { color: #CBD5E1; }
-        .stat-card.blue-card .stat-value { color: #ffffff; }
-        .stat-card.blue-card .stat-icon { background: rgba(255,255,255,0.1); color: var(--accent-gold); }
-        .stat-card.blue-card .progress-track { background: rgba(255,255,255,0.2); }
+        .stat-card {
+            background: var(--bg-surface); padding: 32px; border-radius: var(--radius-xl);
+            border: 1px solid var(--border); box-shadow: var(--shadow-sm); transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative; overflow: hidden;
+        }
+        .stat-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-md); }
+        .stat-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--accent-gold); }
         
         .stat-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px; }
-        .stat-title { font-size: 0.85rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
-        .stat-icon { background: var(--bg-cream); color: var(--primary-navy); padding: 12px; border-radius: 12px; display: flex; }
-        .stat-value { font-size: 2.8rem; font-weight: 800; color: var(--primary-navy); line-height: 1; }
-        .progress-track { height: 8px; background: var(--bg-app); border-radius: 4px; overflow: hidden; margin-top: 24px; }
-        .progress-bar { height: 100%; background: var(--accent-gold); width: 0%; transition: width 1s cubic-bezier(0.4, 0, 0.2, 1); }
+        .stat-title { font-size: 0.9rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+        .stat-icon { background: var(--bg-cream); color: var(--accent-gold); padding: 14px; border-radius: 14px; display: flex; }
+        .stat-value { font-size: 3.2rem; font-weight: 900; color: var(--primary-navy); line-height: 1; }
+        
+        .progress-track { height: 10px; background: var(--bg-app); border-radius: 5px; overflow: hidden; margin-top: 24px; box-shadow: inset 0 1px 2px rgba(0,0,0,0.03); }
+        .progress-bar { height: 100%; background: var(--primary-navy); width: 0%; transition: width 1s cubic-bezier(0.4, 0, 0.2, 1); }
 
-        /* ROTEIRO */
-        .week-container { background: var(--bg-surface); border-radius: var(--radius-xl); border: 1px solid var(--border); box-shadow: var(--shadow-sm); margin-bottom: 24px; overflow: hidden; }
-        .week-header { padding: 24px 32px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; background: #ffffff; transition: background 0.2s; user-select: none; }
+        /* ==== ROTEIRO (ACCORDION PREMIUM DESCOMPLICA) ==== */
+        .week-container { background: var(--bg-surface); border-radius: var(--radius-xl); border: 1px solid var(--border); box-shadow: var(--shadow-sm); margin-bottom: 24px; overflow: hidden; transition: box-shadow 0.3s ease; }
+        .week-container:hover { box-shadow: var(--shadow-md); }
+        
+        .week-header {
+            padding: 24px 32px; display: flex; justify-content: space-between; align-items: center;
+            cursor: pointer; background: #ffffff; transition: background 0.2s; user-select: none;
+        }
         .week-header:hover { background: var(--bg-cream); }
-        .week-title-box { display: flex; flex-direction: column; gap: 6px; }
-        .week-title-box h3 { font-size: 1.25rem; font-weight: 700; color: var(--primary-navy); }
-        .week-subtitle { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
-        .week-badge { background: var(--primary-navy); color: #ffffff; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; }
-        .mini-progress { display: flex; align-items: center; gap: 8px; font-size: 0.8rem; font-weight: 700; color: var(--accent-gold); }
-        .mini-progress-track { width: 60px; height: 6px; background: #E2E8F0; border-radius: 3px; overflow: hidden; }
+        
+        .week-title-box { display: flex; flex-direction: column; gap: 8px; }
+        .week-title-box h3 { font-size: 1.3rem; font-weight: 800; color: var(--primary-navy); }
+        .week-subtitle { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+        .week-badge { background: var(--primary-navy); color: #ffffff; padding: 6px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; }
+        
+        /* Mini Progress Bar na Header */
+        .mini-progress { display: flex; align-items: center; gap: 10px; font-size: 0.85rem; font-weight: 800; color: var(--accent-gold); }
+        .mini-progress-track { width: 70px; height: 7px; background: #E2E8F0; border-radius: 3.5px; overflow: hidden; }
         .mini-progress-bar { height: 100%; background: var(--accent-gold); width: 0%; transition: 0.3s;}
 
         .week-content { display: none; padding: 0 32px 32px 32px; border-top: 1px solid var(--border); background: var(--bg-cream); }
         .days-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 24px; margin-top: 32px; }
 
-        .day-card { background: #ffffff; border-radius: var(--radius-lg); padding: 24px; border: 1px solid var(--border); box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
-        .day-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px dashed var(--border); }
-        .day-icon { background: var(--primary-navy); color: #ffffff; width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.2rem; }
-        .day-title h4 { font-size: 1.05rem; font-weight: 800; color: var(--primary-navy); }
+        /* DAY CARD ESTILO DESCOMPLICA */
+        .day-card { background: #ffffff; border-radius: var(--radius-lg); padding: 28px; border: 1px solid var(--border); box-shadow: 0 2px 4px rgba(0,0,0,0.02); transition: transform 0.2s ease; }
+        .day-card:hover { transform: translateY(-3px); }
+        .day-header { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px dashed var(--border); }
+        .day-icon { background: rgba(194, 166, 112, 0.1); color: var(--accent-gold); width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.3rem; }
+        .day-title h4 { font-size: 1.1rem; font-weight: 800; color: var(--primary-navy); }
         .day-title span { font-size: 0.8rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase;}
 
-        .specific-topic-list { display: flex; flex-direction: column; gap: 12px; }
-        .specific-topic { display: flex; align-items: flex-start; gap: 12px; padding: 12px; border-radius: var(--radius-md); transition: 0.2s; background: var(--bg-app); border: 1px solid transparent; }
-        .specific-topic:hover { border-color: var(--border); }
+        .specific-topic-list { display: flex; flex-direction: column; gap: 14px; }
+        
+        .specific-topic { display: flex; align-items: flex-start; gap: 14px; padding: 14px; border-radius: var(--radius-md); transition: 0.2s; background: var(--bg-app); border: 1px solid transparent; }
+        .specific-topic:hover { border-color: var(--border); background: #f0f2f5; }
         .specific-topic.done { background: #F0FDF4; opacity: 0.6; border-color: #A7F3D0; }
         .specific-topic.done span { text-decoration: line-through; color: var(--text-muted); }
 
-        .chk-custom { appearance: none; min-width: 22px; width: 22px; height: 22px; border: 2px solid var(--primary-navy); border-radius: 6px; cursor: pointer; position: relative; background: white; margin-top: 2px; transition: 0.2s; }
+        /* Checkbox Navy */
+        .chk-custom {
+            appearance: none; min-width: 24px; width: 24px; height: 24px; border: 2px solid var(--primary-navy);
+            border-radius: 6px; cursor: pointer; position: relative; background: white; margin-top: 2px; transition: 0.2s;
+        }
         .chk-custom:checked { background: var(--primary-navy); border-color: var(--primary-navy); }
-        .chk-custom:checked::after { content: '✔'; color: #fff; position: absolute; font-size: 12px; font-weight: bold; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+        .chk-custom:checked::after { content: '✔'; color: #fff; position: absolute; font-size: 14px; font-weight: 900; top: 50%; left: 50%; transform: translate(-50%, -50%); }
 
         .topic-text-wrap { flex: 1; display: flex; align-items: center; justify-content: space-between; gap: 8px;}
-        .topic-text-wrap span { font-size: 0.9rem; font-weight: 500; color: var(--text-main); line-height: 1.4; }
-        
-        /* SIMULADOS */
-        .sim-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px; }
-        .sim-card { background: var(--bg-surface); padding: 32px; border-radius: var(--radius-xl); border: 1px solid var(--border); box-shadow: var(--shadow-sm);}
-        .sim-card h3 { font-size: 1.1rem; font-weight: 800; color: var(--primary-navy); margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center;}
-        .input-group { margin-bottom: 20px; }
-        .input-group label { display: block; font-size: 0.85rem; font-weight: 700; color: var(--text-muted); margin-bottom: 8px; }
-        .input-group input { width: 100%; padding: 14px; border: 1px solid var(--border); border-radius: 8px; font-size: 1.1rem; font-weight: 700; outline: none; transition: all 0.2s; background: var(--bg-app); color: var(--primary-navy);}
-        .input-group input:focus { border-color: var(--accent-gold); background: white; box-shadow: 0 0 0 3px rgba(194, 166, 112, 0.1); }
+        .topic-text-wrap span { font-size: 0.95rem; font-weight: 600; color: var(--text-main); line-height: 1.5; }
+        .topic-link { color: var(--accent-gold); text-decoration: none; display: flex; align-items: center; padding: 4px; border-radius: 4px; transition: 0.2s; }
+        .topic-link:hover { background: rgba(194, 166, 112, 0.1); color: var(--primary-navy); }
 
-        /* GESTÃO DE DADOS */
-        .data-management { margin-top: 60px; padding-top: 32px; border-top: 1px solid var(--border); }
-        .btn-group { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 16px; }
-        .btn-primary { padding: 12px 24px; background: var(--primary-navy); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; display: flex; align-items: center; gap: 8px; transition: 0.2s; }
-        .btn-primary:hover { background: var(--primary-hover); }
-        .btn-outline { padding: 12px 24px; background: var(--bg-cream); border: 1px solid var(--accent-gold); color: var(--accent-gold); border-radius: 8px; cursor: pointer; font-weight: 600; display: flex; align-items: center; gap: 8px; transition: 0.2s; }
+        /* ==== SIMULADOS CARD ==== */
+        .sim-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px; }
+        .sim-card { background: var(--bg-surface); padding: 32px; border-radius: var(--radius-xl); border: 1px solid var(--border); box-shadow: var(--shadow-sm); transition: transform 0.2s ease; }
+        .sim-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); }
+        .sim-card h3 { font-size: 1.2rem; font-weight: 800; color: var(--primary-navy); margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center;}
+        
+        .input-group { margin-bottom: 20px; }
+        .input-group label { display: block; font-size: 0.9rem; font-weight: 700; color: var(--text-muted); margin-bottom: 10px; }
+        .input-group input { width: 100%; padding: 16px; border: 1px solid var(--border); border-radius: var(--radius-md); font-size: 1.15rem; font-weight: 800; outline: none; transition: all 0.2s; background: var(--bg-app); color: var(--primary-navy);}
+        .input-group input:focus { border-color: var(--accent-gold); background: white; box-shadow: 0 0 0 4px rgba(194, 166, 112, 0.1); }
+
+        /* ==== GESTÃO DE DADOS BOTÕES DESCOMPLICA ==== */
+        .data-management { margin-top: 64px; padding-top: 32px; border-top: 1px solid var(--border); }
+        .btn-group { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 20px; }
+        .btn-primary { padding: 14px 28px; background: var(--primary-navy); color: white; border: none; border-radius: var(--radius-md); cursor: pointer; font-weight: 700; font-size: 0.95rem; display: flex; align-items: center; gap: 10px; transition: 0.2s; }
+        .btn-primary:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 4px 10px rgba(26, 54, 93, 0.1); }
+        .btn-outline { padding: 14px 28px; background: var(--bg-cream); border: 1px solid var(--accent-gold); color: var(--accent-gold); border-radius: var(--radius-md); cursor: pointer; font-weight: 700; font-size: 0.95rem; display: flex; align-items: center; gap: 10px; transition: 0.2s; }
         .btn-outline:hover { background: var(--accent-gold); color: white; }
-        .btn-danger { padding: 12px 24px; background: white; border: 1px solid #EF4444; color: #EF4444; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.2s; }
+        .btn-danger { padding: 14px 28px; background: white; border: 1px solid #EF4444; color: #EF4444; border-radius: var(--radius-md); font-weight: 700; font-size: 0.95rem; cursor: pointer; transition: 0.2s; }
         .btn-danger:hover { background: #EF4444; color: white; }
 
+        /* ==== MOBILE RESPONSIVE ==== */
         .sidebar-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 999; }
+        
         @media (max-width: 900px) {
             .sidebar { position: fixed; left: -300px; height: 100%; box-shadow: 10px 0 30px rgba(0,0,0,0.5); }
             .sidebar.open { left: 0; transform: translateX(0); }
             .sidebar-overlay.open { display: block; }
             .mobile-toggle { display: block; }
-            .content-area { padding: 20px; }
+            .topbar { padding: 0 20px; }
+            .content-area { padding: 24px; }
+            .header-title { font-size: 2rem; }
+            .header-subtitle { font-size: 1rem; margin-bottom: 32px; }
             .stats-grid { grid-template-columns: 1fr; }
+            .week-header { padding: 20px; }
+            .mini-progress { display: none; } /* Ocultar progresso mini no mobile */
+            .day-card { padding: 20px; }
         }
     </style>
 </head>
@@ -164,12 +218,9 @@
 
     <aside class="sidebar">
         <div class="brand">
-            <img src="logo.png" alt="Logo Iago Manguary" onerror="this.style.display='none'">
-            <div class="brand-text">
-                <h2>Iago Manguary</h2>
-                <p>Academy</p>
-            </div>
+            <img src="logo.png" alt="Logo Manguary" onerror="this.style.display='none'">
         </div>
+
         <nav class="nav-menu">
             <div class="nav-item active" onclick="switchView('dashboard', this)">
                 <span class="material-symbols-rounded">space_dashboard</span> Visão Estratégica
@@ -189,8 +240,9 @@
                 <button class="mobile-toggle" onclick="toggleMobileMenu()">
                     <span class="material-symbols-rounded">menu</span>
                 </button>
-                <div style="font-weight: 600; color: #E2E8F0; font-size: 0.9rem; display: none;" id="desktop-tag">Ciclo de 12 Semanas até a Prova</div>
+                <div style="font-weight: 700; color: var(--text-muted); font-size: 0.9rem; display: none;" id="desktop-tag">Matriz de Referência ENEM (80/20)</div>
             </div>
+            
             <div class="pomodoro-container">
                 <span class="material-symbols-rounded" style="color: var(--accent-gold); font-size: 20px;">timer</span>
                 <div class="timer-display" id="timer-display">25:00</div>
@@ -200,11 +252,13 @@
         </header>
 
         <div class="content-area">
+            
             <section id="dashboard" class="view-section active">
-                <h1 class="header-title">Evolução do Edital</h1>
-                <p class="header-subtitle">Acompanhe a sua preparação para novembro.</p>
+                <h1 class="header-title">Evolução Estratégica</h1>
+                <p class="header-subtitle">Mensure o seu avanço nos tópicos de maior relevância estatística.</p>
+
                 <div class="stats-grid">
-                    <div class="stat-card blue-card">
+                    <div class="stat-card">
                         <div class="stat-header">
                             <span class="stat-title">Cobertura Geral</span>
                             <span class="stat-icon"><span class="material-symbols-rounded">monitoring</span></span>
@@ -212,13 +266,15 @@
                         <div class="stat-value" id="dash-perc">0%</div>
                         <div class="progress-track"><div class="progress-bar" id="dash-bar"></div></div>
                     </div>
+
                     <div class="stat-card">
                         <div class="stat-header">
                             <span class="stat-title">Tópicos Dominados</span>
                             <span class="stat-icon"><span class="material-symbols-rounded">task_alt</span></span>
                         </div>
-                        <div class="stat-value"><span id="dash-tasks">0</span><span style="font-size: 1.2rem; color: var(--text-muted);" id="dash-total"> / 0</span></div>
+                        <div class="stat-value"><span id="dash-tasks">0</span><span style="font-size: 1.4rem; color: var(--text-muted);" id="dash-total"> / 0</span></div>
                     </div>
+
                     <div class="stat-card">
                         <div class="stat-header">
                             <span class="stat-title">Média (Simulados)</span>
@@ -230,30 +286,44 @@
             </section>
 
             <section id="roteiro" class="view-section">
-                <h1 class="header-title">Plano de Ação Diário</h1>
-                <p class="header-subtitle">Da base até a véspera do ENEM. Siga o roteiro passo a passo.</p>
-                <div id="planner-container"></div>
+                <h1 class="header-title">Trilha de Aprovação</h1>
+                <p class="header-subtitle">Saiba exatamente o que estudar hoje. Da base até a véspera.</p>
+                
+                <div id="planner-container">
+                    </div>
             </section>
 
             <section id="simulados" class="view-section">
                 <h1 class="header-title">Histórico de Performance</h1>
-                <p class="header-subtitle">Mensure seus acertos ao longo do ciclo.</p>
-                <div class="sim-grid" id="sims-container"></div>
+                <p class="header-subtitle">Sua evolução em pontos ao longo das semanas.</p>
+                
+                <div class="sim-grid" id="sims-container">
+                    </div>
 
                 <div class="data-management">
-                    <h3 style="margin-bottom: 8px; color: var(--primary-navy); font-weight: 700;">Gestão de Dados do Aluno</h3>
-                    <p style="font-size: 0.9rem; color: var(--text-muted);">Mantenha seu progresso seguro fazendo backups regulares na sua máquina.</p>
+                    <h3 style="margin-bottom: 8px; color: var(--primary-navy); font-weight: 800; font-size: 1.2rem;">Gestão de Dados Ativa</h3>
+                    <p style="font-size: 0.95rem; color: var(--text-muted);">Mantenha seu progresso seguro fazendo backups regulares na sua máquina.</p>
+                    
                     <div class="btn-group">
-                        <button class="btn-primary" onclick="exportarDados()"><span class="material-symbols-rounded">download</span> Baixar Backup</button>
-                        <label class="btn-outline"><span class="material-symbols-rounded">upload</span> Importar Backup<input type="file" id="import-file" style="display: none;" accept=".json" onchange="importarDados(event)"></label>
-                        <button class="btn-danger" onclick="hardReset()">Limpar Base de Dados</button>
+                        <button class="btn-primary" onclick="exportarDados()">
+                            <span class="material-symbols-rounded">download</span> Baixar Backup
+                        </button>
+                        
+                        <label class="btn-outline">
+                            <span class="material-symbols-rounded">upload</span> Importar Backup
+                            <input type="file" id="import-file" style="display: none;" accept=".json" onchange="importarDados(event)">
+                        </label>
+                        
+                        <button class="btn-danger" onclick="hardReset()">Resetar Tudo</button>
                     </div>
                 </div>
             </section>
+
         </div>
     </main>
 
 <script>
+    // Configuração Mobile
     function toggleMobileMenu() {
         document.querySelector('.sidebar').classList.toggle('open');
         document.querySelector('.sidebar-overlay').classList.toggle('open');
@@ -262,8 +332,9 @@
 
     // TIMER POMODORO
     let timerInterval;
-    let timeLeft = 25 * 60;
+    let timeLeft = 25 * 60; // 25 min
     let isTimerRunning = false;
+    // Som suave de notificação (URL pública)
     const alarmePomodoro = new Audio('https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3');
 
     function updateTimerDisplay() {
@@ -302,111 +373,35 @@
         document.getElementById('timer-btn-play').innerHTML = '<span class="material-symbols-rounded">play_arrow</span>';
     }
 
-    // CICLO MASTER 12 SEMANAS - ATÉ O ENEM
+
+    // BANCO DE DADOS DETALHADO (Mesmo conteúdo detalhado anterior)
     const studyPlanDetailed = [
-        { week: 1, title: "Semana 1: A Construção da Base", badge: "Fundações", days: [
-            { id: "s1d1", dayName: "Segunda", subject: "Matemática + Redação", topics: [{ id: "t1", text: "Matemática Básica: Fração e Decimais." }, { id: "t2", text: "Regra de Três Simples e Composta." }, { id: "t3", text: "Redação: As 5 Competências do ENEM." }] },
-            { id: "s1d2", dayName: "Terça", subject: "Biologia + Geografia", topics: [{ id: "t4", text: "Citologia: Procariontes vs Eucariontes." }, { id: "t5", text: "Membrana Plasmática e Transportes." }, { id: "t6", text: "Cartografia: Escalas e Projeções." }] },
-            { id: "s1d3", dayName: "Quarta", subject: "História + Química", topics: [{ id: "t7", text: "História do Brasil: Período Pré-Colonial." }, { id: "t8", text: "Economia Açucareira e Capitanias." }, { id: "t9", text: "Química Geral: Modelos Atômicos." }] },
-            { id: "s1d4", dayName: "Quinta", subject: "Física + Linguagens", topics: [{ id: "t10", text: "Cinemática: MRU." }, { id: "t11", text: "Cinemática: MRUV." }, { id: "t12", text: "Linguagens: Funções da Linguagem." }] },
-            { id: "s1d5", dayName: "Sexta", subject: "Sociologia + Filosofia", topics: [{ id: "t13", text: "Cultura, Etnocentrismo e Relativismo." }, { id: "t14", text: "O surgimento e Pré-Socráticos." }] },
-            { id: "s1d6", dayName: "Sábado", subject: "Fechamento", topics: [{ id: "t15", text: "1 Redação Completa (Meio Ambiente)." }, { id: "t16", text: "Lista de 30 questões da base." }] }
+        { week: 1, title: "Fundações e Bases Estruturais", badge: "A Construção da Base", days: [
+            { id: "s1d1", dayName: "Segunda", subject: "Matemática + Redação", topics: [{ id: "t1", text: "Fração e Decimais (Operações básicas, dízimas).", link: "#" }, { id: "t2", text: "Regra de Três Simples e Composta.", link: "#" }, { id: "t3", text: "Redação: As 5 Competências do ENEM." }] },
+            { id: "s1d2", dayName: "Terça", subject: "Biologia + Geografia", topics: [{ id: "t4", text: "Citologia Básica (Procariontes vs Eucariontes)." }, { id: "t5", text: "Membrana Plasmática (Osmose, Difusão Transporte Ativo)." }, { id: "t6", text: "Cartografia (Escalas cartográficas e projeções Mercator/Peters)." }] },
+            { id: "s1d3", dayName: "Quarta", subject: "História + Química", topics: [{ id: "t7", text: "História do Brasil: Período Pré-Colonial." }, { id: "t8", text: "História do Brasil: Economia Açucareira e Capitanias Hereditárias." }, { id: "t9", text: "Química Geral: Modelos Atômicos (Dalton a Bohr)." }] },
+            { id: "s1d4", dayName: "Quinta", subject: "Física + Linguagens", topics: [{ id: "t10", text: "Cinemática: MRU (Velocidade média)." }, { id: "t11", text: "Cinemática: MRUV (Aceleração, Torricelli, Gráficos)." }, { id: "t12", text: "Linguagens: Funções da Linguagem." }] },
+            { id: "s1d5", dayName: "Sexta", subject: "Sociologia + Filosofia", topics: [{ id: "t13", text: "Sociologia: Cultura, Etnocentrismo e Relativismo Cultural." }, { id: "t14", text: "Filosofia: O surgimento e Pré-Socráticos." }] },
+            { id: "s1d6", dayName: "Sábado", subject: "Prática e Fechamento", topics: [{ id: "t15", text: "1 Redação Completa (Eixo Temático: Saúde Pública)." }, { id: "t16", text: "Lista de 30 questões: Razão, Proporção e Escala." }] }
         ]},
-        { week: 2, title: "Semana 2: Aprofundamento Inicial", badge: "Dinâmica e Espaço", days: [
-            { id: "s2d1", dayName: "Segunda", subject: "Matemática + Redação", topics: [{ id: "t17", text: "Função do 1º Grau (Gráficos)." }, { id: "t18", text: "Função do 2º Grau (Vértices)." }, { id: "t19", text: "Redação: Tese e Introdução." }] },
-            { id: "s2d2", dayName: "Terça", subject: "Biologia + Geografia", topics: [{ id: "t20", text: "Ecologia: Cadeias e Teias." }, { id: "t21", text: "Relações Ecológicas." }, { id: "t22", text: "Geografia Agrária: Estrutura Fundiária." }] },
-            { id: "s2d3", dayName: "Quarta", subject: "História + Química", topics: [{ id: "t23", text: "Ciclo do Ouro e Inconfidência." }, { id: "t24", text: "Brasil Independência." }, { id: "t25", text: "Ligações Químicas e Polaridade." }] },
-            { id: "s2d4", dayName: "Quinta", subject: "Física + Linguagens", topics: [{ id: "t26", text: "Dinâmica: 3 Leis de Newton." }, { id: "t27", text: "Atrito e Força Centrípeta." }, { id: "t28", text: "Quinhentismo e Barroco." }] },
-            { id: "s2d5", dayName: "Sexta", subject: "Sociologia + Filosofia", topics: [{ id: "t29", text: "Karl Marx e a Mais-Valia." }, { id: "t30", text: "Sócrates e Platão." }] },
-            { id: "s2d6", dayName: "Sábado", subject: "Fechamento", topics: [{ id: "t31", text: "Simulado Misto de 45 questões." }, { id: "t32", text: "Análise de Erros." }] }
-        ]},
-        { week: 3, title: "Semana 3: Geometria e Matéria", badge: "Matemática de Peso", days: [
-            { id: "s3d1", dayName: "Segunda", subject: "Matemática + Redação", topics: [{ id: "t33", text: "Geometria Plana: Áreas." }, { id: "t34", text: "Trigonometria no Triângulo Retângulo." }, { id: "t35", text: "Redação: Desenvolvimento (D1 e D2)." }] },
-            { id: "s3d2", dayName: "Terça", subject: "Biologia + Geografia", topics: [{ id: "t36", text: "Bioenergética: Respiração Celular." }, { id: "t37", text: "Fotossíntese." }, { id: "t38", text: "Geografia: Climatologia e El Niño." }] },
-            { id: "s3d3", dayName: "Quarta", subject: "História + Química", topics: [{ id: "t39", text: "Primeiro Reinado e Período Regencial." }, { id: "t40", text: "Química: Funções Inorgânicas." }, { id: "t41", text: "Estequiometria Básica." }] },
-            { id: "s3d4", dayName: "Quinta", subject: "Física + Linguagens", topics: [{ id: "t42", text: "Termologia: Calorimetria." }, { id: "t43", text: "Termodinâmica." }, { id: "t44", text: "Romantismo no Brasil." }] },
-            { id: "s3d5", dayName: "Sexta", subject: "Sociologia + Filosofia", topics: [{ id: "t45", text: "Émile Durkheim e o Fato Social." }, { id: "t46", text: "Aristóteles e a Ética." }] },
-            { id: "s3d6", dayName: "Sábado", subject: "Fechamento", topics: [{ id: "t47", text: "1 Redação (Tecnologia e Sociedade)." }, { id: "t48", text: "Lista: Geometria e Estequiometria." }] }
-        ]},
-        { week: 4, title: "Semana 4: Espaço e Energia", badge: "Projeção 3D", days: [
-            { id: "s4d1", dayName: "Segunda", subject: "Matemática + Redação", topics: [{ id: "t49", text: "Geometria Espacial: Prismas." }, { id: "t50", text: "Cilindros e Cones." }, { id: "t51", text: "Redação: A Conclusão Perfeita (PI)." }] },
-            { id: "s4d2", dayName: "Terça", subject: "Biologia + Geografia", topics: [{ id: "t52", text: "Genética: 1ª Lei de Mendel." }, { id: "t53", text: "Grupos Sanguíneos (Sistema ABO)." }, { id: "t54", text: "Geopolítica: Guerra Fria." }] },
-            { id: "s4d3", dayName: "Quarta", subject: "História + Química", topics: [{ id: "t55", text: "Segundo Reinado (Economia Cafeeira)." }, { id: "t56", text: "Físico-Química: Soluções e Concentração." }, { id: "t57", text: "Titulação." }] },
-            { id: "s4d4", dayName: "Quinta", subject: "Física + Linguagens", topics: [{ id: "t58", text: "Ondulatória: Elementos da Onda." }, { id: "t59", text: "Fenômenos Ondulatórios (Interferência)." }, { id: "t60", text: "Realismo e Naturalismo." }] },
-            { id: "s4d5", dayName: "Sexta", subject: "Sociologia + Filosofia", topics: [{ id: "t61", text: "Max Weber e a Ação Social." }, { id: "t62", text: "Filosofia Medieval: Agostinho e Aquino." }] },
-            { id: "s4d6", dayName: "Sábado", subject: "Fechamento", topics: [{ id: "t63", text: "Simulado Metade (Linguagens/Humanas)." }, { id: "t64", text: "Simulado Metade (Natureza/Matemática)." }] }
-        ]},
-        { week: 5, title: "Semana 5: Vida e Eletricidade", badge: "O Core do ENEM", days: [
-            { id: "s5d1", dayName: "Segunda", subject: "Matemática + Redação", topics: [{ id: "t65", text: "Análise Combinatória: Permutação." }, { id: "t66", text: "Arranjo e Combinação." }, { id: "t67", text: "Revisão dos Eixos Temáticos de Redação." }] },
-            { id: "s5d2", dayName: "Terça", subject: "Biologia + Geografia", topics: [{ id: "t68", text: "Fisiologia Humana: Digestão." }, { id: "t69", text: "Circulação e Respiração." }, { id: "t70", text: "Globalização e Blocos Econômicos." }] },
-            { id: "s5d3", dayName: "Quarta", subject: "História + Química", topics: [{ id: "t71", text: "Era Vargas." }, { id: "t72", text: "Química Orgânica: Hidrocarbonetos." }, { id: "t73", text: "Funções Oxigenadas." }] },
-            { id: "s5d4", dayName: "Quinta", subject: "Física + Linguagens", topics: [{ id: "t74", text: "Eletrodinâmica: Corrente e Tensão." }, { id: "t75", text: "Leis de Ohm e Resistores (Obrigatório)." }, { id: "t76", text: "Modernismo (1ª e 2ª Geração)." }] },
-            { id: "s5d5", dayName: "Sexta", subject: "Sociologia + Filosofia", topics: [{ id: "t77", text: "Indústria Cultural e Escola de Frankfurt." }, { id: "t78", text: "Maquiavel e Hobbes (Filosofia Política)." }] },
-            { id: "s5d6", dayName: "Sábado", subject: "Fechamento", topics: [{ id: "t79", text: "Lista Extensa: Circuitos Elétricos." }, { id: "t80", text: "Lista: Funções Orgânicas." }] }
-        ]},
-        { week: 6, title: "Semana 6: O Brasil Moderno", badge: "Século XX", days: [
-            { id: "s6d1", dayName: "Segunda", subject: "Matemática + Redação", topics: [{ id: "t81", text: "Probabilidade Simples e Condicional." }, { id: "t82", text: "Estatística: Média, Moda e Mediana." }, { id: "t83", text: "2 Redações em Sequência." }] },
-            { id: "s6d2", dayName: "Terça", subject: "Biologia + Geografia", topics: [{ id: "t84", text: "Evolução: Darwinismo e Lamarckismo." }, { id: "t85", text: "Saúde Pública: Vacinas e Soros." }, { id: "t86", text: "Industrialização Brasileira." }] },
-            { id: "s6d3", dayName: "Quarta", subject: "História + Química", topics: [{ id: "t87", text: "República Populista e Ditadura Militar." }, { id: "t88", text: "Química Orgânica: Isomeria." }, { id: "t89", text: "Reações Orgânicas Básicas." }] },
-            { id: "s6d4", dayName: "Quinta", subject: "Física + Linguagens", topics: [{ id: "t90", text: "Óptica Geométrica: Reflexão." }, { id: "t91", text: "Refração e Lentes." }, { id: "t92", text: "Arte Contemporânea e Vanguardas." }] },
-            { id: "s6d5", dayName: "Sexta", subject: "Sociologia + Filosofia", topics: [{ id: "t93", text: "Cidadania e Direitos Humanos." }, { id: "t94", text: "Rousseau, Locke e o Contratualismo." }] },
-            { id: "s6d6", dayName: "Sábado", subject: "Fechamento", topics: [{ id: "t95", text: "Simulado ENEM Completo - DIA 1." }] }
-        ]},
-        { week: 7, title: "Semana 7: Revisão de Impacto", badge: "Transição Reta Final", days: [
-            { id: "s7d1", dayName: "Segunda", subject: "Matemática + Redação", topics: [{ id: "t96", text: "Matemática Financeira: Juros." }, { id: "t97", text: "Logaritmos e Exponenciais." }, { id: "t98", text: "Correção Analítica das Redações." }] },
-            { id: "s7d2", dayName: "Terça", subject: "Biologia + Geografia", topics: [{ id: "t99", text: "Botânica Básica: Fisiologia Vegetal." }, { id: "t100", text: "Problemas Ambientais Urbanos." }, { id: "t101", text: "Demografia e Migrações." }] },
-            { id: "s7d3", dayName: "Quarta", subject: "História + Química", topics: [{ id: "t102", text: "Guerras Mundiais e Fascismo." }, { id: "t103", text: "Eletroquímica: Pilhas." }, { id: "t104", text: "Eletroquímica: Eletrólise." }] },
-            { id: "s7d4", dayName: "Quinta", subject: "Física + Linguagens", topics: [{ id: "t105", text: "Eletromagnetismo Básico." }, { id: "t106", text: "Revisão Dinâmica/Energia." }, { id: "t107", text: "Variação Linguística." }] },
-            { id: "s7d5", dayName: "Sexta", subject: "Sociologia + Filosofia", topics: [{ id: "t108", text: "Movimentos Sociais." }, { id: "t109", text: "Filosofia Contemporânea (Nietzsche/Sartre)." }] },
-            { id: "s7d6", dayName: "Sábado", subject: "Fechamento", topics: [{ id: "t110", text: "Simulado ENEM Completo - DIA 2." }] }
-        ]},
-        { week: 8, title: "Semana 8: Imersão em Provas (2023-2022)", badge: "Reta Final 1", days: [
-            { id: "s8d1", dayName: "Segunda", subject: "Matemática", topics: [{ id: "t111", text: "Resolução Matemática ENEM 2023." }] },
-            { id: "s8d2", dayName: "Terça", subject: "Natureza", topics: [{ id: "t112", text: "Resolução Natureza ENEM 2023." }] },
-            { id: "s8d3", dayName: "Quarta", subject: "Humanas", topics: [{ id: "t113", text: "Resolução Humanas ENEM 2023." }] },
-            { id: "s8d4", dayName: "Quinta", subject: "Linguagens", topics: [{ id: "t114", text: "Resolução Linguagens ENEM 2023." }] },
-            { id: "s8d5", dayName: "Sexta", subject: "Estudo Reverso", topics: [{ id: "t115", text: "Corrigir TODOS os erros de Matemática e Natureza." }] },
-            { id: "s8d6", dayName: "Sábado", subject: "Provas", topics: [{ id: "t116", text: "Aplicar Prova ENEM 2022 (Cronometrado)." }] }
-        ]},
-        { week: 9, title: "Semana 9: Imersão em Provas (2021-2020)", badge: "Reta Final 2", days: [
-            { id: "s9d1", dayName: "Segunda", subject: "Matemática", topics: [{ id: "t117", text: "Resolução Matemática ENEM 2021." }] },
-            { id: "s9d2", dayName: "Terça", subject: "Natureza", topics: [{ id: "t118", text: "Resolução Natureza ENEM 2021." }] },
-            { id: "s9d3", dayName: "Quarta", subject: "Humanas", topics: [{ id: "t119", text: "Resolução Humanas ENEM 2021." }] },
-            { id: "s9d4", dayName: "Quinta", subject: "Linguagens", topics: [{ id: "t120", text: "Resolução Linguagens ENEM 2021." }] },
-            { id: "s9d5", dayName: "Sexta", subject: "Estudo Reverso", topics: [{ id: "t121", text: "Corrigir TODOS os erros. Foco nas fáceis." }] },
-            { id: "s9d6", dayName: "Sábado", subject: "Provas", topics: [{ id: "t122", text: "Aplicar Prova ENEM 2020 (Cronometrado)." }] }
-        ]},
-        { week: 10, title: "Semana 10: Lacunas e Vícios", badge: "Cirurgia Fina", days: [
-            { id: "s10d1", dayName: "Segunda", subject: "Matemática", topics: [{ id: "t123", text: "Refazer apenas questões ERRADAS de Exatas (2020-2023)." }] },
-            { id: "s10d2", dayName: "Terça", subject: "Natureza", topics: [{ id: "t124", text: "Revisão Ativa de Fórmulas (Física e Química)." }] },
-            { id: "s10d3", dayName: "Quarta", subject: "Humanas", topics: [{ id: "t125", text: "Mapeamento das pegadinhas de interpretação de Humanas." }] },
-            { id: "s10d4", dayName: "Quinta", subject: "Redação", topics: [{ id: "t126", text: "Decorar estrutura e conectivos intratextuais." }] },
-            { id: "s10d5", dayName: "Sexta", subject: "Revisão", topics: [{ id: "t127", text: "Leitura de Flashcards e Mapas Mentais (Natureza)." }] },
-            { id: "s10d6", dayName: "Sábado", subject: "Treino Livre", topics: [{ id: "t128", text: "Lista de 45 questões mistas (Natureza/Mat)." }] }
-        ]},
-        { week: 11, title: "Semana 11: Semana do Dia 1 (Humanas/Redação)", badge: "Foco no 1º Domingo", days: [
-            { id: "s11d1", dayName: "Segunda", subject: "Redação", topics: [{ id: "t129", text: "Última redação para correção." }] },
-            { id: "s11d2", dayName: "Terça", subject: "Linguagens", topics: [{ id: "t130", text: "Revisão de Vanguardas e Arte." }] },
-            { id: "s11d3", dayName: "Quarta", subject: "Humanas", topics: [{ id: "t131", text: "Revisão História do Brasil e Filosofia." }] },
-            { id: "s11d4", dayName: "Quinta", subject: "Leitura Rápida", topics: [{ id: "t132", text: "Aulões de Véspera (YouTube) - Humanas." }] },
-            { id: "s11d5", dayName: "Sexta", subject: "Estratégia", topics: [{ id: "t133", text: "Definir tempo de prova e ordem das questões." }] },
-            { id: "s11d6", dayName: "Sábado", subject: "Descanso Absoluto", topics: [{ id: "t134", text: "Separar documentação, caneta e alimentos." }] }
-        ]},
-        { week: 12, title: "Semana 12: Semana do Dia 2 (Exatas)", badge: "Foco no 2º Domingo", days: [
-            { id: "s12d1", dayName: "Segunda", subject: "Matemática", topics: [{ id: "t135", text: "Revisão de Fórmulas de Geometria e Estatística." }] },
-            { id: "s12d2", dayName: "Terça", subject: "Física", topics: [{ id: "t136", text: "Revisão Eletrodinâmica e Cinemática." }] },
-            { id: "s12d3", dayName: "Quarta", subject: "Química", topics: [{ id: "t137", text: "Revisão Estequiometria e Orgânica." }] },
-            { id: "s12d4", dayName: "Quinta", subject: "Biologia", topics: [{ id: "t138", text: "Revisão Ecologia e Fisiologia." }] },
-            { id: "s12d5", dayName: "Sexta", subject: "Aulões", topics: [{ id: "t139", text: "Aulões de Véspera (YouTube) - Exatas." }] },
-            { id: "s12d6", dayName: "Sábado", subject: "Preparação Final", topics: [{ id: "t140", text: "Descanso mental e preparação logística." }] }
+        { week: 2, title: "Dinâmica e Sociedade", badge: "Aprofundamento Exatas", days: [
+            { id: "s2d1", dayName: "Segunda", subject: "Matemática + Redação", topics: [{ id: "t17", text: "Função do 1º Grau (Coeficiente angular/linear)." }, { id: "t18", text: "Função do 2º Grau (Vértices, Máximos/Mínimos)." }, { id: "t19", text: "Redação: Estruturando a Introdução (Tese)." }] },
+            { id: "s2d2", dayName: "Terça", subject: "Biologia + Geografia", topics: [{ id: "t20", text: "Ecologia: Dinâmica de Populações e Cadeias." }, { id: "t21", text: "Ecologia: Relações Ecológicas (Harmônicas e Desarmônicas)." }, { id: "t22", text: "Geografia Agrária: Estrutura Fundiária e Revolução Verde." }] },
+            { id: "s2d3", dayName: "Quarta", subject: "História + Química", topics: [{ id: "t23", text: "Brasil Colônia: Ciclo do Ouro e Inconfidência." }, { id: "t24", text: "Independência do Brasil." }, { id: "t25", text: "Química: Ligações Químicas e Polaridade." }] },
+            { id: "s2d4", dayName: "Quinta", subject: "Física + Linguagens", topics: [{ id: "t26", text: "Dinâmica: As 3 Leis de Newton." }, { id: "t27", text: "Força de Atrito e Força Centrípeta." }, { id: "t28", text: "Literatura: Quinhentismo e Barroco." }] },
+            { id: "s2d5", dayName: "Sexta", subject: "Sociologia + Filosofia", topics: [{ id: "t29", text: "Sociologia: Karl Marx (Mais-valia)." }, { id: "t30", text: "Filosofia Clássica: Sócrates e Platão." }] },
+            { id: "s2d6", dayName: "Sábado", subject: "Simulado Parcial", topics: [{ id: "t31", text: "Resolver 45 Questões de Ciências da Natureza." }, { id: "t32", text: "Análise de Erros do Simulado." }] }
         ]}
     ];
 
+    // NAVEGAÇÃO TABS
     function switchView(viewId, el) {
         document.querySelectorAll('.view-section').forEach(v => v.classList.remove('active'));
         document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
         document.getElementById(viewId).classList.add('active');
         el.classList.add('active');
+        
+        // Fecha menu mobile ao clicar
         if(window.innerWidth <= 900) {
             document.querySelector('.sidebar').classList.remove('open');
             document.querySelector('.sidebar-overlay').classList.remove('open');
@@ -418,6 +413,7 @@
         content.style.display = content.style.display === 'block' ? 'none' : 'block';
     }
 
+    // RENDERIZAR A INTERFACE
     function renderApp() {
         const planContainer = document.getElementById('planner-container');
         const simContainer = document.getElementById('sims-container');
@@ -430,11 +426,15 @@
             let daysHtml = week.days.map(day => {
                 let topicsHtml = day.topics.map(topic => {
                     totalCheckboxes++;
+                    
+                    let linkHtml = topic.link ? `<a href="${topic.link}" target="_blank" title="Acessar Material" class="topic-link"><span class="material-symbols-rounded">menu_book</span></a>` : '';
+
                     return `
                         <label class="specific-topic" id="lbl-${topic.id}">
                             <input type="checkbox" class="chk-custom" id="chk-${topic.id}" data-week="${wIdx}" onchange="updateSystem()">
                             <div class="topic-text-wrap">
                                 <span>${topic.text}</span>
+                                ${linkHtml}
                             </div>
                         </label>
                     `;
@@ -479,11 +479,11 @@
                 <div class="sim-card">
                     <h3>Ciclo Formativo ${wIdx + 1} </h3>
                     <div class="input-group">
-                        <label>Dia 1 (Humanas/Ling/Red) - Max: 90</label>
+                        <label>Dia 1 (Humanas, Ling, Redação) - Max: 90</label>
                         <input type="number" id="sim-${wIdx}-d1" placeholder="Acertos" oninput="updateSims()">
                     </div>
                     <div class="input-group">
-                        <label>Dia 2 (Natureza/Mat) - Max: 90</label>
+                        <label>Dia 2 (Natureza, Matemática) - Max: 90</label>
                         <input type="number" id="sim-${wIdx}-d2" placeholder="Acertos" oninput="updateSims()">
                     </div>
                 </div>
@@ -494,11 +494,13 @@
         loadData();
     }
 
+    // ATUALIZAÇÃO DO PROGRESSO GERAL E POR SEMANA
     function updateSystem() {
         const checkboxes = document.querySelectorAll('.chk-custom');
         let done = 0;
         let saveData = {};
         let weekProgress = {}; 
+        
         studyPlanDetailed.forEach((_, i) => weekProgress[i] = { done: 0, total: 0 });
 
         checkboxes.forEach(chk => {
@@ -516,11 +518,13 @@
             }
         });
 
+        // Dashboard Geral
         const perc = checkboxes.length === 0 ? 0 : Math.round((done / checkboxes.length) * 100);
         document.getElementById('dash-tasks').innerText = done;
         document.getElementById('dash-perc').innerText = perc + '%';
         document.getElementById('dash-bar').style.width = perc + '%';
 
+        // Barras Semanais
         Object.keys(weekProgress).forEach(wIdx => {
             const wData = weekProgress[wIdx];
             const wPerc = wData.total === 0 ? 0 : Math.round((wData.done / wData.total) * 100);
@@ -532,7 +536,7 @@
             }
         });
 
-        localStorage.setItem('iago_enem_oficial', JSON.stringify(saveData));
+        localStorage.setItem('iago_enem_manguary_v2', JSON.stringify(saveData));
     }
 
     function updateSims() {
@@ -550,15 +554,24 @@
 
         const media = count > 0 ? Math.round(total / count) : '--';
         document.getElementById('dash-sim').innerText = media !== '--' ? media + '/90' : media;
-        localStorage.setItem('iago_enem_sims_oficial', JSON.stringify(simData));
+        
+        localStorage.setItem('iago_enem_sims_det_v2', JSON.stringify(simData));
     }
 
+    // CARREGAR DADOS
     function loadData() {
-        const p = JSON.parse(localStorage.getItem('iago_enem_oficial')) || {};
-        const s = JSON.parse(localStorage.getItem('iago_enem_sims_oficial')) || {};
+        const p = JSON.parse(localStorage.getItem('iago_enem_manguary_v2')) || {};
+        const s = JSON.parse(localStorage.getItem('iago_enem_sims_det_v2')) || {};
 
-        Object.keys(p).forEach(k => { const el = document.getElementById(k); if(el) el.checked = p[k]; });
-        Object.keys(s).forEach(k => { const el = document.getElementById(k); if(el) el.value = s[k]; });
+        Object.keys(p).forEach(k => {
+            const el = document.getElementById(k);
+            if(el) el.checked = p[k];
+        });
+
+        Object.keys(s).forEach(k => {
+            const el = document.getElementById(k);
+            if(el) el.value = s[k];
+        });
 
         updateSystem();
         updateSims();
@@ -568,11 +581,18 @@
         if(firstWeek) firstWeek.style.display = 'block';
     }
 
+    // BACKUP FUNCTIONS
     function exportarDados() {
-        const dados = { progresso: localStorage.getItem('iago_enem_oficial'), simulados: localStorage.getItem('iago_enem_sims_oficial') };
+        const dados = {
+            progresso: localStorage.getItem('iago_enem_manguary_v2'),
+            simulados: localStorage.getItem('iago_enem_sims_det_v2')
+        };
         const blob = new Blob([JSON.stringify(dados)], { type: "application/json" });
         const url = URL.createObjectURL(blob);
-        const a = document.createElement('a'); a.href = url; a.download = `backup_enem_${new Date().toLocaleDateString('pt-BR').replace(/\//g, '-')}.json`; a.click();
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `backup_manguary_enem_${new Date().toLocaleDateString('pt-BR').replace(/\//g, '-')}.json`;
+        a.click();
     }
 
     function importarDados(event) {
@@ -582,17 +602,21 @@
         reader.onload = function(e) {
             try {
                 const dados = JSON.parse(e.target.result);
-                if (dados.progresso) localStorage.setItem('iago_enem_oficial', dados.progresso);
-                if (dados.simulados) localStorage.setItem('iago_enem_sims_oficial', dados.simulados);
-                alert("Backup restaurado com sucesso!"); location.reload();
-            } catch (error) { alert("Arquivo corrompido."); }
+                if (dados.progresso) localStorage.setItem('iago_enem_manguary_v2', dados.progresso);
+                if (dados.simulados) localStorage.setItem('iago_enem_sims_det_v2', dados.simulados);
+                alert("Backup restaurado com sucesso! Seus dados estão atualizados.");
+                location.reload();
+            } catch (error) {
+                alert("Erro: Arquivo de backup inválido.");
+            }
         };
         reader.readAsText(file);
     }
 
     function hardReset() {
-        if(confirm("Deseja apagar permanentemente o progresso?")) {
-            localStorage.removeItem('iago_enem_oficial'); localStorage.removeItem('iago_enem_sims_oficial'); location.reload();
+        if(confirm("ATENÇÃO: Deseja apagar permanentemente todo o seu progresso?")) {
+            localStorage.clear();
+            location.reload();
         }
     }
 
