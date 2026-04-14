@@ -3,241 +3,358 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Master Plan ENEM | Iago Manguary</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>Plataforma de Estudos | Iago Manguary</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,1,0" />
+
     <style>
         :root {
-            --primary: #1E3A8A; /* Azul Escuro */
-            --secondary: #F59E0B; /* Amarelo/Âmbar ENEM */
-            --accent: #10B981; /* Verde Sucesso */
-            --bg: #f4f7f6;
-            --card: #ffffff;
-            --text: #1e293b;
-            --border: #e2e8f0;
+            /* Paleta de Cores Profissional */
+            --bg-body: #f3f4f6;
+            --bg-surface: #ffffff;
+            --primary: #2563eb; /* Azul Royal */
+            --primary-hover: #1d4ed8;
+            --primary-light: #eff6ff;
+            --text-main: #111827;
+            --text-muted: #6b7280;
+            --border: #e5e7eb;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --radius-lg: 16px;
+            --radius-md: 12px;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg);
-            color: var(--text);
-            margin: 0;
-            padding: 0;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            display: flex;
+            min-height: 100vh;
         }
 
-        header {
-            background: var(--primary);
-            color: white;
-            padding: 2.5rem 1rem;
-            text-align: center;
-            border-bottom: 5px solid var(--secondary);
-        }
-
-        header h1 { margin: 0; font-size: 2rem; letter-spacing: -1px; }
-        header p { margin: 0.5rem 0 0; opacity: 0.9; font-weight: 400; }
-
-        .container {
-            max-width: 1000px;
-            margin: -30px auto 50px;
-            padding: 0 20px;
-        }
-
-        /* Stats Bar */
-        .stats-bar {
-            background: var(--card);
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+        /* ==== SIDEBAR ==== */
+        .sidebar {
+            width: 260px;
+            background-color: var(--bg-surface);
+            border-right: 1px solid var(--border);
             display: flex;
             flex-direction: column;
+            position: fixed;
+            height: 100vh;
+            z-index: 50;
+            transition: transform 0.3s ease;
+        }
+
+        .brand {
+            padding: 24px;
+            display: flex;
             align-items: center;
-            margin-bottom: 30px;
+            gap: 12px;
+            border-bottom: 1px solid var(--border);
         }
 
-        .progress-container {
-            width: 100%;
-            background: #edf2f7;
-            border-radius: 999px;
-            height: 20px;
-            margin: 15px 0;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--secondary), #d97706);
-            width: 0%;
-            transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .progress-text {
+        .brand-icon {
+            background: var(--primary);
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-weight: 700;
-            color: var(--primary);
         }
 
-        /* Accordion Semanas */
-        .week-section {
-            background: var(--card);
-            border-radius: 12px;
-            margin-bottom: 15px;
+        .brand-text h2 { font-size: 1rem; font-weight: 700; }
+        .brand-text p { font-size: 0.75rem; color: var(--text-muted); }
+
+        .nav-menu { padding: 16px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            color: var(--text-muted);
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .nav-item:hover { background-color: var(--bg-body); color: var(--text-main); }
+        .nav-item.active { background-color: var(--primary-light); color: var(--primary); }
+        .nav-item .material-symbols-rounded { font-size: 20px; }
+
+        /* ==== CONTEÚDO PRINCIPAL ==== */
+        .main-content {
+            margin-left: 260px;
+            flex: 1;
+            padding: 40px;
+            max-width: 1200px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 32px;
+        }
+
+        .header h1 { font-size: 1.8rem; font-weight: 700; letter-spacing: -0.5px; }
+        .header p { color: var(--text-muted); margin-top: 4px; }
+
+        /* ==== ABAS (TABS) ==== */
+        .tab-content { display: none; animation: fadeIn 0.4s ease; }
+        .tab-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* ==== WIDGETS DO DASHBOARD ==== */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        .card {
+            background: var(--bg-surface);
+            border-radius: var(--radius-lg);
+            padding: 24px;
             border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+        .card-title { font-size: 0.875rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+        .card-icon { color: var(--primary); background: var(--primary-light); padding: 8px; border-radius: 8px; display: flex; }
+        .card-value { font-size: 2rem; font-weight: 700; }
+
+        /* Progress Bar Linear */
+        .progress-track { background: var(--bg-body); height: 8px; border-radius: 4px; overflow: hidden; margin-top: 12px; }
+        .progress-indicator { background: var(--primary); height: 100%; transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
+
+        /* ==== ROTEIRO DE ESTUDOS (ACCORDION) ==== */
+        .week-container {
+            background: var(--bg-surface);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border);
+            margin-bottom: 16px;
             overflow: hidden;
+            box-shadow: var(--shadow-sm);
         }
 
         .week-header {
-            padding: 20px;
-            background: #fff;
-            cursor: pointer;
+            padding: 20px 24px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            cursor: pointer;
+            background: var(--bg-surface);
             transition: background 0.2s;
             user-select: none;
         }
 
-        .week-header:hover { background: #fef3c7; }
-        .week-header h3 { margin: 0; font-size: 1.1rem; color: var(--primary); }
+        .week-header:hover { background: var(--bg-body); }
+        .week-title { display: flex; align-items: center; gap: 12px; }
+        .week-title h3 { font-size: 1.1rem; font-weight: 600; color: var(--text-main); }
         
-        .week-content {
-            display: none;
-            padding: 0 20px 20px;
-            border-top: 1px solid var(--border);
+        .badge {
+            background: var(--primary-light); color: var(--primary);
+            padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 600;
         }
 
-        .week-content.active { display: block; }
+        .week-body { display: none; padding: 0 24px 24px 24px; border-top: 1px solid var(--border); }
+        .week-body.active { display: block; animation: fadeIn 0.3s ease; }
 
-        /* Estilo dos Dias e Tópicos */
-        .day-block {
-            margin-top: 20px;
-            padding: 15px;
-            background: #f8fafc;
-            border-radius: 8px;
-            border-left: 4px solid var(--secondary);
-        }
-
-        .day-title {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-weight: 700;
-            margin-bottom: 10px;
-            color: var(--text);
-        }
-
-        .day-title input {
-            width: 20px;
-            height: 20px;
-            cursor: pointer;
-            accent-color: var(--primary);
-        }
-
-        .topic-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            font-size: 0.92rem;
-        }
-
-        .topic-list li {
-            padding: 4px 0;
-            padding-left: 32px;
-            color: #475569;
-            position: relative;
-        }
-
-        .topic-list li::before {
-            content: "•";
-            position: absolute;
-            left: 15px;
-            color: var(--secondary);
-            font-weight: bold;
-        }
-
-        .completed-card {
-            background: #f1f5f9 !important;
-            opacity: 0.7;
-            border-left-color: #cbd5e1;
-        }
-
-        .completed-card .day-title {
-            text-decoration: line-through;
-            color: #94a3b8;
-        }
-
-        /* Simulados Section */
-        .simulados-grid {
+        /* Grade de Dias */
+        .days-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            gap: 15px;
-            margin-top: 30px;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 16px;
+            margin-top: 24px;
         }
 
-        .sim-card {
-            background: white;
-            padding: 15px;
-            border-radius: 8px;
-            border: 1px solid var(--border);
-            text-align: center;
+        .day-card {
+            background: var(--bg-body);
+            border-radius: var(--radius-md);
+            padding: 16px;
+            border-left: 4px solid var(--warning);
+            transition: all 0.2s;
         }
 
-        .sim-card label { display: block; font-size: 0.8rem; font-weight: 600; margin-bottom: 8px; }
-        .sim-card input {
-            width: 80%;
-            padding: 8px;
-            border: 1px solid var(--border);
-            border-radius: 4px;
-            text-align: center;
-            font-weight: 700;
+        .day-card.completed { border-left-color: var(--success); opacity: 0.7; background: #f0fdf4; }
+        .day-card.completed .topic-text { text-decoration: line-through; color: var(--text-muted); }
+
+        .day-header { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 12px; }
+        
+        /* Checkbox Customizado Premium */
+        .checkbox-wrapper { display: inline-flex; align-items: center; cursor: pointer; margin-top: 2px; }
+        .checkbox-wrapper input {
+            appearance: none; width: 22px; height: 22px;
+            border: 2px solid var(--text-muted); border-radius: 6px;
+            outline: none; transition: all 0.2s; cursor: pointer;
+            position: relative; background: white;
+        }
+        .checkbox-wrapper input:checked { background: var(--success); border-color: var(--success); }
+        .checkbox-wrapper input:checked::after {
+            content: '✔'; color: white; position: absolute; font-size: 14px;
+            top: 50%; left: 50%; transform: translate(-50%, -50%);
         }
 
-        .btn-reset {
-            margin-top: 40px;
-            background: #dc2626;
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            width: 100%;
-            transition: 0.3s;
+        .day-info h4 { font-size: 0.95rem; font-weight: 700; color: var(--text-main); }
+        .day-info span { font-size: 0.8rem; color: var(--primary); font-weight: 600; display: block; margin-bottom: 8px;}
+
+        .topic-list { list-style: none; padding-left: 0; }
+        .topic-list li {
+            font-size: 0.85rem; color: var(--text-muted); margin-bottom: 6px;
+            display: flex; align-items: center; gap: 8px;
         }
+        .topic-list li::before { content: ''; width: 4px; height: 4px; background: var(--primary); border-radius: 50%; }
 
-        .btn-reset:hover { background: #b91c1c; }
+        /* ==== SIMULADOS ==== */
+        .simulados-wrapper {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px;
+        }
+        .sim-input-group { display: flex; flex-direction: column; gap: 8px; }
+        .sim-input-group label { font-size: 0.85rem; font-weight: 600; color: var(--text-muted); }
+        .sim-input-group input {
+            padding: 12px; border: 1px solid var(--border); border-radius: var(--radius-md);
+            font-size: 1rem; font-weight: 600; color: var(--text-main); transition: border 0.2s;
+        }
+        .sim-input-group input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-light); }
 
-        @media (max-width: 600px) {
-            header h1 { font-size: 1.5rem; }
-            .container { margin-top: -20px; }
+        /* Botão Perigo */
+        .btn-danger {
+            background: white; border: 1px solid var(--danger); color: var(--danger);
+            padding: 12px 24px; border-radius: var(--radius-md); font-weight: 600;
+            cursor: pointer; transition: all 0.2s; margin-top: 24px; display: inline-flex; align-items: center; gap: 8px;
+        }
+        .btn-danger:hover { background: var(--danger); color: white; }
+
+        /* Responsividade */
+        .menu-toggle { display: none; background: none; border: none; font-size: 28px; cursor: pointer; color: var(--text-main); }
+
+        @media (max-width: 900px) {
+            .sidebar { transform: translateX(-100%); }
+            .sidebar.open { transform: translateX(0); box-shadow: 4px 0 24px rgba(0,0,0,0.1); }
+            .main-content { margin-left: 0; padding: 24px; }
+            .menu-toggle { display: block; margin-bottom: 24px; }
+            .header { flex-direction: column; align-items: flex-start; gap: 16px; }
         }
     </style>
 </head>
 <body>
 
-<header>
-    <h1>Dashboard Estratégico ENEM</h1>
-    <p>Foco nos Assuntos de Alta Recorrência (80/20) | Iago Manguary</p>
-</header>
-
-<div class="container">
-    <div class="stats-bar">
-        <span class="progress-text">Progresso Geral: <span id="percent-val">0%</span></span>
-        <div class="progress-container">
-            <div class="progress-fill" id="progress-bar"></div>
+    <nav class="sidebar" id="sidebar">
+        <div class="brand">
+            <div class="brand-icon">IM</div>
+            <div class="brand-text">
+                <h2>Iago Manguary</h2>
+                <p>Plano Estratégico</p>
+            </div>
         </div>
-        <small id="days-count">0 de 48 tarefas concluídas</small>
-    </div>
+        <div class="nav-menu">
+            <div class="nav-item active" onclick="switchTab('tab-dashboard', this)">
+                <span class="material-symbols-rounded">space_dashboard</span>
+                Visão Geral
+            </div>
+            <div class="nav-item" onclick="switchTab('tab-roteiro', this)">
+                <span class="material-symbols-rounded">menu_book</span>
+                Roteiro de Estudos
+            </div>
+            <div class="nav-item" onclick="switchTab('tab-desempenho', this)">
+                <span class="material-symbols-rounded">insights</span>
+                Desempenho
+            </div>
+            <div class="nav-item" onclick="switchTab('tab-config', this)">
+                <span class="material-symbols-rounded">settings</span>
+                Configurações
+            </div>
+        </div>
+    </nav>
 
-    <div id="planner-content"></div>
+    <main class="main-content">
+        <button class="menu-toggle" onclick="document.getElementById('sidebar').classList.toggle('open')">
+            <span class="material-symbols-rounded">menu</span>
+        </button>
 
-    <div class="simulados-grid" id="simulados-content"></div>
+        <header class="header">
+            <div>
+                <h1 id="saudacao">Olá, Iago</h1>
+                <p>Aqui está o resumo da sua jornada de preparação.</p>
+            </div>
+        </header>
 
-    <button class="btn-reset" onclick="resetAll()">Reiniciar Todo o Plano ENEM</button>
-</div>
+        <section id="tab-dashboard" class="tab-content active">
+            <div class="dashboard-grid">
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title">Progresso do Edital</span>
+                        <span class="card-icon"><span class="material-symbols-rounded">flag</span></span>
+                    </div>
+                    <div class="card-value" id="dash-percent">0%</div>
+                    <div class="progress-track"><div class="progress-indicator" id="dash-progress" style="width: 0%"></div></div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title">Tarefas Concluídas</span>
+                        <span class="card-icon"><span class="material-symbols-rounded">task_alt</span></span>
+                    </div>
+                    <div class="card-value"><span id="dash-completed">0</span><span style="font-size:1rem; color:var(--text-muted)"> / 48</span></div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title">Semanas Totais</span>
+                        <span class="card-icon"><span class="material-symbols-rounded">calendar_month</span></span>
+                    </div>
+                    <div class="card-value">8</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="tab-roteiro" class="tab-content">
+            <div id="planner-container"></div>
+        </section>
+
+        <section id="tab-desempenho" class="tab-content">
+            <div class="card">
+                <h3 style="margin-bottom: 24px; color: var(--text-main);">Registro de Simulados (Acertos)</h3>
+                <div class="simulados-wrapper" id="simulados-container"></div>
+            </div>
+        </section>
+
+        <section id="tab-config" class="tab-content">
+            <div class="card">
+                <h3>Gerenciamento de Dados</h3>
+                <p style="color: var(--text-muted); margin-top: 8px;">Atenção: Ao limpar o progresso, todo o seu histórico de tarefas e simulados será apagado permanentemente deste navegador.</p>
+                <button class="btn-danger" onclick="resetProgress()">
+                    <span class="material-symbols-rounded">delete_forever</span>
+                    Resetar Plano Completo
+                </button>
+            </div>
+        </section>
+
+    </main>
 
 <script>
-    const detailedPlan = [
+    // Dados completos do Master Plan
+    const masterPlanData = [
         {
-            week: 1, title: "Fundações de Matemática e Humanas",
+            week: 1, title: "Fundações de Matemática e Humanas", badge: "Base",
             days: [
                 { d: "Segunda", t: "Matemática Básica + Redação", topics: ["Razão, Proporção e Regra de 3", "Porcentagem (Cai em +15 questões!)", "Redação: Estrutura da Dissertação-Argumentativa"] },
                 { d: "Terça", t: "História + Geografia", topics: ["História do Brasil: Período Colonial e Escravidão", "Geografia Física: Climatologia e Biomas Brasileiros"] },
@@ -248,7 +365,7 @@
             ]
         },
         {
-            week: 2, title: "Funções, Físico-Química e Modernidade",
+            week: 2, title: "Funções, Físico-Química e Modernidade", badge: "Avanço",
             days: [
                 { d: "Segunda", t: "Matemática + Redação", topics: ["Funções de 1º e 2º Grau (Análise de Gráficos)", "Redação: Competência 1 (Domínio da Norma Padrão)"] },
                 { d: "Terça", t: "História + Geografia", topics: ["História Geral: Revolução Industrial", "Geografia: Urbanização e Problemas Ambientais Urbanos"] },
@@ -259,7 +376,7 @@
             ]
         },
         {
-            week: 3, title: "Geometria e Brasil Império",
+            week: 3, title: "Geometria e Brasil Império", badge: "Essencial",
             days: [
                 { d: "Segunda", t: "Matemática + Redação", topics: ["Geometria Plana: Áreas de Figuras Planas e Triângulos", "Redação: Competência 2 (Compreensão da Proposta)"] },
                 { d: "Terça", t: "História + Geografia", topics: ["Brasil Império (1º, 2º Reinado e Período Regencial)", "Geografia Agrária: Estrutura fundiária e agronegócio"] },
@@ -270,7 +387,7 @@
             ]
         },
         {
-            week: 4, title: "Espaço, Ondas e Atualidades",
+            week: 4, title: "Espaço, Ondas e Atualidades", badge: "Peso Alto",
             days: [
                 { d: "Segunda", t: "Matemática + Redação", topics: ["Geometria Espacial: Volume de Prismas e Cilindros", "Redação: Competência 3 (Seleção de Argumentos)"] },
                 { d: "Terça", t: "História + Geografia", topics: ["História do Brasil: Era Vargas e República Populista", "Geopolítica Mundial e Conflitos Atuais"] },
@@ -281,172 +398,220 @@
             ]
         },
         {
-            week: 5, title: "Guerra Fria e Eletricidade",
+            week: 5, title: "Guerra Fria e Eletricidade", badge: "Foco",
             days: [
                 { d: "Segunda", t: "Matemática + Redação", topics: ["Geometria Espacial: Cones e Esferas", "Redação: Competência 4 (Uso de Conectivos)"] },
                 { d: "Terça", t: "História + Geografia", topics: ["História Geral: Guerras Mundiais e Guerra Fria", "Geografia: Demografia e Migrações"] },
                 { d: "Quarta", t: "Biologia + Química", topics: ["Botânica Básica (Fisiologia e grupos vegetais)", "Química Orgânica: Isomeria"] },
                 { d: "Quinta", t: "Matemática + Linguagens", topics: ["Matemática Financeira (Juros e Descontos)", "Linguagens: Educação Física e Esportes no ENEM"] },
-                { d: "Sexta", t: "Física + Filosofia", topics: ["Física: Eletrodinâmica (Circuitos, Resistores - Cai muito!)", "Filosofia: Filosofia Política (Maquiavel, Hobbes, Rousseau)"] },
+                { d: "Sexta", t: "Física + Filosofia", topics: ["Física: Eletrodinâmica (Circuitos, Resistores)", "Filosofia: Filosofia Política (Maquiavel, Hobbes, Rousseau)"] },
                 { d: "Sábado", t: "Prática e Redação", topics: ["Escrever 1 Redação (Eixo: Tecnologia/Sociedade)", "Resolver 20 questões de Eletrodinâmica"] }
             ]
         },
         {
-            week: 6, title: "Revisão Final Temática",
+            week: 6, title: "Revisão Final Temática", badge: "Revisão",
             days: [
-                { d: "Segunda", t: "Matemática + Redação", topics: ["Revisão: Logaritmos e Funções Exponenciais", "Redação: Competência 5 (Proposta de Intervenção Completa)"] },
+                { d: "Segunda", t: "Matemática + Redação", topics: ["Revisão: Logaritmos e Funções Exponenciais", "Redação: Competência 5 (Proposta de Intervenção)"] },
                 { d: "Terça", t: "História + Geografia", topics: ["Brasil: Ditadura Militar e Redemocratização", "Geografia: Indústria Brasileira e Globalização"] },
-                { d: "Quarta", t: "Biologia + Química", topics: ["Evolução (Darwin e Lamarck) e Imunização (Vacinas/Soros)", "Eletroquímica (Pilhas e Eletrólise)"] },
+                { d: "Quarta", t: "Biologia + Química", topics: ["Evolução (Darwin/Lamarck) e Imunização", "Eletroquímica (Pilhas e Eletrólise)"] },
                 { d: "Quinta", t: "Matemática + Linguagens", topics: ["Revisão: Análise Combinatória e Probabilidade", "Linguagens: Gêneros Textuais e Intertextualidade"] },
-                { d: "Sexta", t: "Física + Sociologia", topics: ["Física: Óptica Geométrica e Refração", "Sociologia: Cidadania, Movimentos Sociais e Direitos Humanos"] },
-                { d: "Sábado", t: "Simulado Completo - Dia 1", topics: ["Resolver prova antiga do ENEM (Dia 1: Humanas, Linguagens, Redação)", "Simular tempo real (5h30min)"] }
+                { d: "Sexta", t: "Física + Sociologia", topics: ["Física: Óptica Geométrica e Refração", "Sociologia: Cidadania e Direitos Humanos"] },
+                { d: "Sábado", t: "Simulado Completo - Dia 1", topics: ["Resolver prova antiga do ENEM (Dia 1)", "Simular tempo real (5h30min)"] }
             ]
         },
         {
-            week: 7, title: "Reta Final (Treinamento de Prova)",
+            week: 7, title: "Reta Final (Treinamento)", badge: "Estratégia",
             days: [
-                { d: "Segunda", t: "Análise de Erros (Simulado Dia 1)", topics: ["Mapear questões erradas por falta de atenção vs conteúdo", "Revisar teoria específica dos erros de Humanas"] },
-                { d: "Terça", t: "Matemática", topics: ["Maratona de Questões: Estatística e Geometria Plana", "Treino de Matemática Básica sob pressão de tempo"] },
-                { d: "Quarta", t: "Natureza", topics: ["Maratona de Questões: Ecologia, Estequiometria e Circuitos", "Leitura de gráficos e tabelas experimentais"] },
-                { d: "Quinta", t: "Redação + Repertório", topics: ["Escrever 2 redações em sequência", "Memorizar 3 citações coringas (Filosofia/Sociologia)"] },
-                { d: "Sexta", t: "Estratégia de Prova", topics: ["Como aplicar o método de resolução em 3 passadas (Fáceis > Médias > Chutes)", "Descanso ativo"] },
-                { d: "Sábado", t: "Simulado Completo - Dia 2", topics: ["Resolver prova antiga do ENEM (Dia 2: Natureza e Matemática)", "Simular tempo real (5h)"] }
+                { d: "Segunda", t: "Análise de Erros (Dia 1)", topics: ["Mapear questões erradas por falta de atenção", "Revisar teoria específica de Humanas"] },
+                { d: "Terça", t: "Matemática", topics: ["Maratona: Estatística e Geometria Plana", "Treino sob pressão de tempo"] },
+                { d: "Quarta", t: "Natureza", topics: ["Maratona: Ecologia, Estequiometria e Circuitos", "Leitura de gráficos experimentais"] },
+                { d: "Quinta", t: "Redação + Repertório", topics: ["Escrever 2 redações em sequência", "Memorizar 3 citações coringas"] },
+                { d: "Sexta", t: "Estratégia de Prova", topics: ["Método em 3 passadas (Fáceis > Médias > Chutes)", "Descanso ativo"] },
+                { d: "Sábado", t: "Simulado Completo - Dia 2", topics: ["Resolver prova antiga do ENEM (Dia 2)", "Simular tempo real (5h)"] }
             ]
         },
         {
-            week: 8, title: "Semana D (Ajuste Fino)",
+            week: 8, title: "Semana D (Ajuste Fino)", badge: "Véspera",
             days: [
-                { d: "Segunda", t: "Análise de Erros (Simulado Dia 2)", topics: ["Estudo reverso focado em Matemática e Natureza", "Identificar pegadinhas clássicas da prova"] },
-                { d: "Terça", t: "Revisão Flexível", topics: ["Leitura apenas dos resumos e mapas mentais das matérias de maior dificuldade"] },
-                { d: "Quarta", t: "Revisão Flexível", topics: ["Resolução de 15 questões de Natureza + 15 de Matemática Básica"] },
-                { d: "Quinta", t: "Fechamento", topics: ["Revisão rápida de Fórmulas de Física e Matemática", "Check-list da estrutura da Redação"] },
-                { d: "Sexta", t: "Descanso", topics: ["Zero estudo. Preparar documento, caneta preta transparente e lanches", "Assistir a um filme ou série relaxante"] },
-                { d: "Sábado", t: "Pré-Prova", topics: ["Revisão de véspera (Assistir a aulões abertos no YouTube, apenas de forma passiva)"] }
+                { d: "Segunda", t: "Análise de Erros (Dia 2)", topics: ["Estudo reverso focado em Matemática e Natureza", "Identificar pegadinhas clássicas"] },
+                { d: "Terça", t: "Revisão Flexível", topics: ["Leitura de resumos das matérias de maior dificuldade"] },
+                { d: "Quarta", t: "Revisão Flexível", topics: ["Resolução de 15 questões Natureza + 15 Mat. Básica"] },
+                { d: "Quinta", t: "Fechamento", topics: ["Revisão rápida de Fórmulas", "Check-list da estrutura da Redação"] },
+                { d: "Sexta", t: "Descanso", topics: ["Zero estudo. Preparar documento e lanches", "Assistir a um filme relaxante"] },
+                { d: "Sábado", t: "Pré-Prova", topics: ["Revisão de véspera (YouTube de forma passiva)"] }
             ]
         }
     ];
 
-    function init() {
-        const container = document.getElementById('planner-content');
-        const simContainer = document.getElementById('simulados-content');
+    // Alternar entre as abas do menu lateral
+    function switchTab(tabId, element) {
+        document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+        document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+        
+        document.getElementById(tabId).classList.add('active');
+        element.classList.add('active');
 
-        detailedPlan.forEach(week => {
+        if(window.innerWidth <= 900) {
+            document.getElementById('sidebar').classList.remove('open');
+        }
+    }
+
+    // Gerar a interface
+    function renderApp() {
+        const plannerContainer = document.getElementById('planner-container');
+        const simuladosContainer = document.getElementById('simulados-container');
+        
+        // Saudação dinâmica baseada na hora
+        const hora = new Date().getHours();
+        let saudacaoText = "Bom dia";
+        if(hora >= 12 && hora < 18) saudacaoText = "Boa tarde";
+        else if(hora >= 18) saudacaoText = "Boa noite";
+        document.getElementById('saudacao').innerText = `${saudacaoText}, Iago`;
+
+        masterPlanData.forEach((week, wIndex) => {
+            // Construir Cards de Estudo
             const weekHtml = `
-                <div class="week-section">
-                    <div class="week-header" onclick="toggleWeek(${week.week})">
-                        <h3>Semana ${week.week}: ${week.title}</h3>
-                        <span id="week-icon-${week.week}">+</span>
+                <div class="week-container">
+                    <div class="week-header" onclick="toggleAccordion(this)">
+                        <div class="week-title">
+                            <span class="badge">${week.badge}</span>
+                            <h3>Semana ${week.week}: ${week.title}</h3>
+                        </div>
+                        <span class="material-symbols-rounded chevron">expand_more</span>
                     </div>
-                    <div class="week-content" id="week-content-${week.week}">
-                        ${week.days.map((day, dIdx) => `
-                            <div class="day-block" id="enem-block-w${week.week}-d${dIdx}">
-                                <div class="day-title">
-                                    <input type="checkbox" id="enem-w${week.week}-d${dIdx}" onchange="toggleDay(${week.week}, ${dIdx})">
-                                    <span>${day.d} - ${day.t}</span>
+                    <div class="week-body" id="week-body-${wIndex}">
+                        <div class="days-grid">
+                            ${week.days.map((day, dIndex) => `
+                                <div class="day-card" id="card-${wIndex}-${dIndex}">
+                                    <div class="day-header">
+                                        <label class="checkbox-wrapper">
+                                            <input type="checkbox" id="chk-${wIndex}-${dIndex}" onchange="handleCheck(${wIndex}, ${dIndex})">
+                                        </label>
+                                        <div class="day-info">
+                                            <span>${day.t}</span>
+                                            <h4>${day.d}</h4>
+                                        </div>
+                                    </div>
+                                    <ul class="topic-list">
+                                        ${day.topics.map(topic => `<li class="topic-text">${topic}</li>`).join('')}
+                                    </ul>
                                 </div>
-                                <ul class="topic-list">
-                                    ${day.topics.map(topic => `<li>${topic}</li>`).join('')}
-                                </ul>
-                            </div>
-                        `).join('')}
+                            `).join('')}
+                        </div>
                     </div>
                 </div>
             `;
-            container.innerHTML += weekHtml;
+            plannerContainer.innerHTML += weekHtml;
 
-            // Criar campo de simulado apenas até a semana 6, nas 7 e 8 a dinâmica é diferente
-            if(week.week <= 8) {
-                simContainer.innerHTML += `
-                    <div class="sim-card">
-                        <label>Simulado/Lista Sem. ${week.week}</label>
-                        <input type="number" id="enem-sim-w${week.week}" placeholder="Acertos" onchange="saveSim(${week.week})">
-                    </div>
-                `;
-            }
+            // Construir Inputs de Simulados (Somente semanas 1 a 6 têm lista/simulado direto no padrão antigo, mas adicionei para todas para padronizar o tracker)
+            simuladosContainer.innerHTML += `
+                <div class="sim-input-group">
+                    <label>Desempenho Semana ${week.week}</label>
+                    <input type="number" id="sim-${week.week}" placeholder="Ex: 35 acertos" oninput="saveSimulados()">
+                </div>
+            `;
         });
-        loadProgress();
+
+        loadData();
     }
 
-    function toggleWeek(num) {
-        const content = document.getElementById(`week-content-${num}`);
-        const icon = document.getElementById(`week-icon-${num}`);
-        const isActive = content.classList.contains('active');
+    // Lógica do Accordion
+    function toggleAccordion(headerElement) {
+        const body = headerElement.nextElementSibling;
+        const icon = headerElement.querySelector('.chevron');
         
-        content.classList.toggle('active');
-        icon.innerText = isActive ? '+' : '-';
+        const isClosed = body.style.display === '' || body.style.display === 'none';
+        body.style.display = isClosed ? 'block' : 'none';
+        icon.style.transform = isClosed ? 'rotate(180deg)' : 'rotate(0deg)';
     }
 
-    function toggleDay(w, d) {
-        const checkbox = document.getElementById(`enem-w${w}-d${d}`);
-        const block = document.getElementById(`enem-block-w${w}-d${d}`);
+    // Atualiza estado do Card ao clicar no Checkbox
+    function handleCheck(wIndex, dIndex) {
+        const checkbox = document.getElementById(`chk-${wIndex}-${dIndex}`);
+        const card = document.getElementById(`card-${wIndex}-${dIndex}`);
         
-        if (checkbox.checked) {
-            block.classList.add('completed-card');
+        if(checkbox.checked) {
+            card.classList.add('completed');
         } else {
-            block.classList.remove('completed-card');
+            card.classList.remove('completed');
         }
         saveProgress();
     }
 
+    // Salvar progresso no LocalStorage
     function saveProgress() {
-        const checks = document.querySelectorAll('input[type="checkbox"]');
-        const state = {};
-        checks.forEach(c => state[c.id] = c.checked);
-        localStorage.setItem('enem_iago_progress', JSON.stringify(state));
-        updateProgressBar();
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        const progressData = {};
+        checkboxes.forEach(chk => {
+            progressData[chk.id] = chk.checked;
+        });
+        localStorage.setItem('iago_plataforma_v3', JSON.stringify(progressData));
+        updateDashboard();
     }
 
-    function saveSim(w) {
-        const val = document.getElementById(`enem-sim-w${w}`).value;
-        let sims = JSON.parse(localStorage.getItem('enem_iago_sims')) || {};
-        sims[w] = val;
-        localStorage.setItem('enem_iago_sims', JSON.stringify(sims));
+    // Salvar simulados no LocalStorage
+    function saveSimulados() {
+        const simuladosData = {};
+        masterPlanData.forEach(week => {
+            const input = document.getElementById(`sim-${week.week}`);
+            if(input) simuladosData[`sim-${week.week}`] = input.value;
+        });
+        localStorage.setItem('iago_simulados_v3', JSON.stringify(simuladosData));
     }
 
-    function loadProgress() {
-        const state = JSON.parse(localStorage.getItem('enem_iago_progress')) || {};
-        const sims = JSON.parse(localStorage.getItem('enem_iago_sims')) || {};
+    // Carregar dados salvos
+    function loadData() {
+        const savedProgress = JSON.parse(localStorage.getItem('iago_plataforma_v3')) || {};
+        const savedSimulados = JSON.parse(localStorage.getItem('iago_simulados_v3')) || {};
 
-        Object.keys(state).forEach(id => {
+        // Restaurar Checkboxes
+        Object.keys(savedProgress).forEach(id => {
             const el = document.getElementById(id);
-            if (el) {
-                el.checked = state[id];
-                if(state[id]) el.closest('.day-block').classList.add('completed-card');
+            if(el) {
+                el.checked = savedProgress[id];
+                if(el.checked) {
+                    const parts = id.split('-');
+                    document.getElementById(`card-${parts[1]}-${parts[2]}`).classList.add('completed');
+                }
             }
         });
 
-        Object.keys(sims).forEach(w => {
-            const el = document.getElementById(`enem-sim-w${w}`);
-            if (el) el.value = sims[w];
+        // Restaurar Simulados
+        Object.keys(savedSimulados).forEach(id => {
+            const el = document.getElementById(id);
+            if(el) el.value = savedSimulados[id];
         });
 
-        // Abre a primeira semana por padrão
-        document.getElementById('week-content-1').classList.add('active');
-        document.getElementById('week-icon-1').innerText = '-';
+        // Abrir a primeira semana por padrão
+        const firstWeekHeader = document.querySelector('.week-header');
+        if(firstWeekHeader) toggleAccordion(firstWeekHeader);
 
-        updateProgressBar();
+        updateDashboard();
     }
 
-    function updateProgressBar() {
-        const checks = document.querySelectorAll('input[type="checkbox"]');
-        const checked = Array.from(checks).filter(c => c.checked).length;
-        const total = checks.length;
-        const percent = total === 0 ? 0 : Math.round((checked / total) * 100);
+    // Atualiza a matemática do Dashboard
+    function updateDashboard() {
+        const totalTasks = document.querySelectorAll('input[type="checkbox"]').length;
+        const completedTasks = document.querySelectorAll('input[type="checkbox"]:checked').length;
+        
+        const percentage = totalTasks === 0 ? 0 : Math.round((completedTasks / totalTasks) * 100);
 
-        document.getElementById('progress-bar').style.width = percent + '%';
-        document.getElementById('percent-val').innerText = percent + '%';
-        document.getElementById('days-count').innerText = `${checked} de ${total} tarefas concluídas`;
+        document.getElementById('dash-completed').innerText = completedTasks;
+        document.getElementById('dash-percent').innerText = `${percentage}%`;
+        document.getElementById('dash-progress').style.width = `${percentage}%`;
     }
 
-    function resetAll() {
-        if (confirm("Tens certeza que desejas apagar o teu progresso do ENEM?")) {
-            localStorage.removeItem('enem_iago_progress');
-            localStorage.removeItem('enem_iago_sims');
+    // Apagar tudo
+    function resetProgress() {
+        if(confirm("Tem certeza que deseja apagar todo o progresso do seu plano de estudos? Esta ação não pode ser desfeita.")) {
+            localStorage.removeItem('iago_plataforma_v3');
+            localStorage.removeItem('iago_simulados_v3');
             location.reload();
         }
     }
 
-    window.onload = init;
+    // Iniciar a aplicação
+    window.onload = renderApp;
 </script>
 
 </body>
